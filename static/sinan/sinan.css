@@ -523,7 +523,7 @@ a.feature:hover { border-color: var(--accent); text-decoration: none; }
 .site-footer { border-top: 1px solid var(--line); background: var(--bg); }
 .footer-inner { max-width: 1440px; margin: 0 auto; padding: 48px 24px 28px; }
 .footer-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px 32px; }
-.footer-main.has-columns { grid-template-columns: minmax(0, 2fr) repeat(var(--columns), minmax(0, 1fr)); }
+.footer-main.has-columns { grid-template-columns: minmax(0, 1fr) repeat(var(--columns), minmax(0, 1fr)); }
 .footer-brand .brand { font-size: 16px; }
 .footer-brand .logo { height: 24px; }
 .footer-description { max-width: 24rem; margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
