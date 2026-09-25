@@ -520,7 +520,7 @@ a.feature:hover { border-color: var(--accent); text-decoration: none; }
 
 /* The footer */
 
-.site-footer { border-top: 1px solid var(--line); background: var(--bg-soft); }
+.site-footer { border-top: 1px solid var(--line); background: var(--bg); }
 .footer-inner { max-width: 1440px; margin: 0 auto; padding: 56px 24px 28px; }
 .footer-main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px 32px; }
 .footer-main.has-columns { grid-template-columns: minmax(0, 2fr) repeat(var(--columns), minmax(0, 1fr)); }
@@ -529,7 +529,7 @@ a.feature:hover { border-color: var(--accent); text-decoration: none; }
 .footer-description { max-width: 24rem; margin: 10px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
 .footer-brand .social { margin: 14px 0 0 -8px; }
 .footer-brand .icon-button { width: 34px; height: 34px; color: var(--muted); }
-.footer-brand .icon-button:hover { background: var(--bg-mute); color: var(--ink); }
+.footer-brand .icon-button:hover { background: var(--bg-soft); color: var(--ink); }
 .footer-title { margin: 3px 0 14px; color: var(--ink); font-size: 13.5px; font-weight: 650; }
 .footer-column ul { list-style: none; margin: 0; padding: 0; }
 .footer-column li + li { margin-top: 10px; }
