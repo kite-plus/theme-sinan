@@ -1,0 +1,29 @@
+{{- $lang := .Site.Language -}}
+{{- $s := .Site.ThemeSettings -}}
+<footer class="site-footer">
+  <div class="footer-inner">
+    {{- with $s.footer_columns }}
+    <div class="footer-columns">
+      {{- range . }}
+      <div class="footer-column">
+        {{- with .title }}
+        <p class="footer-title">{{ . }}</p>
+        {{- end }}
+        <ul>
+          {{- range .links }}
+            {{- if and .label .url }}
+          <li>{{ partial "link.html" (dict "label" .label "url" .url "lang" $lang) }}</li>
+            {{- end }}
+          {{- end }}
+        </ul>
+      </div>
+      {{- end }}
+    </div>
+    {{- end }}
+    <div class="footer-bottom">
+      <p class="copyright">{{ with $s.copyright }}{{ . }}{{ else }}&copy; {{ time.Format "2006" .Site.BuildTime }} {{ .Site.Title }}{{ end }}</p>
+      <p class="credit"><a href="{{ url.Rel "rss.xml" }}">RSS</a> · {{ partial "t.html" (dict "k" "powered_pre" "lang" $lang) }}<a href="https://github.com/kite-plus/kite" rel="noopener">Kite</a>{{ partial "t.html" (dict "k" "powered_post" "lang" $lang) }}</p>
+      {{- partial "social.html" . }}
+    </div>
+  </div>
+</footer>

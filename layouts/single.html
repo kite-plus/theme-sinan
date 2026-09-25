@@ -1,0 +1,41 @@
+{{ define "main" }}
+{{- $s := .Site.ThemeSettings -}}
+{{- $lang := .Site.Language -}}
+{{- $site := .Site -}}
+{{- $toc := and $s.show_toc (partial "toc-count.html" .Page) -}}
+<div class="doc{{ if $toc }} with-toc{{ end }}">
+  <article class="doc-body">
+    {{- if eq .Page.Type "post" }}
+    <p class="crumb"><a href="{{ url.For "list" "post" }}">{{ partial "t.html" (dict "k" "news" "lang" $lang) }}</a></p>
+    {{- end }}
+    <header class="doc-header">
+      <h1>{{ .Page.Title }}</h1>
+      <p class="post-meta">
+        <time datetime="{{ time.Format "2006-01-02" .Page.PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" .Page.PublishDate) }}</time>
+        {{- with partial "terms.html" (dict "page" .Page "site" $site) }}
+        <span class="terms">{{ . }}</span>
+        {{- end }}
+      </p>
+    </header>
+    {{- if $toc }}{{ partial "toc.html" (dict "page" .Page "lang" $lang "inline" true) }}{{ end }}
+    <div class="prose">{{ .Page.Content }}</div>
+    {{- /* Prev is the older neighbor and Next the newer, so time runs left
+           to right. */}}
+    {{- if or .Page.Prev .Page.Next }}
+    <footer class="doc-footer">
+      <nav class="pager">
+        {{- with .Page.Prev }}
+        <a class="pager-link prev" rel="prev" href="{{ .RelPermalink }}"><span class="pager-dir">{{ partial "icon.html" "prev" }}{{ partial "t.html" (dict "k" "older_post" "lang" $lang) }}</span><span class="pager-title">{{ .Title }}</span></a>
+        {{- end }}
+        {{- with .Page.Next }}
+        <a class="pager-link next" rel="next" href="{{ .RelPermalink }}"><span class="pager-dir">{{ partial "t.html" (dict "k" "newer_post" "lang" $lang) }}{{ partial "icon.html" "next" }}</span><span class="pager-title">{{ .Title }}</span></a>
+        {{- end }}
+      </nav>
+    </footer>
+    {{- end }}
+  </article>
+  {{- if $toc }}
+  <aside class="doc-aside">{{ partial "toc.html" (dict "page" .Page "lang" $lang) }}</aside>
+  {{- end }}
+</div>
+{{ end }}

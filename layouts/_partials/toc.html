@@ -1,0 +1,17 @@
+{{- /* The sections of a page, from its second and third level headings.
+       Called as: partial "toc.html" (dict "page" .Page "lang" LANG), with
+       "inline" set for the disclosure drawn above the text on a narrow
+       screen instead of the column beside it. */ -}}
+{{- $label := partial "t.html" (dict "k" "on_this_page" "lang" .lang) -}}
+{{- $list := partial "toc-list.html" .page -}}
+{{- if .inline }}
+<details class="toc-inline">
+  <summary>{{ $label }}</summary>
+  {{ $list }}
+</details>
+{{- else }}
+<nav class="toc" aria-label="{{ $label }}">
+  <p class="toc-title">{{ $label }}</p>
+  {{ $list }}
+</nav>
+{{- end }}

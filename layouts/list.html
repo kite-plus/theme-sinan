@@ -1,0 +1,29 @@
+{{ define "main" }}
+{{- $lang := .Site.Language -}}
+{{- $pages := .Pages -}}
+<div class="listing">
+  <header class="listing-header">
+    <h1>{{ partial "t.html" (dict "k" "title" "lang" $lang "page" .Page) }}</h1>
+    <p class="listing-meta">
+      {{- with .Paginator }}
+      <span>{{ partial "t.html" (dict "k" "total" "lang" $lang "n" .TotalItems) }}</span>
+      {{- end }}
+      {{- /* A taxonomy with no terms has no page of its own, so one is linked
+             only once an entry listed here is seen to use it. */}}
+      {{- range .Site.Taxonomies }}
+        {{- $taxonomy := . }}
+        {{- $used := false }}
+        {{- range $pages }}{{ if .Terms $taxonomy }}{{ $used = true }}{{ end }}{{ end }}
+        {{- if $used }}
+      <a href="{{ url.For "taxonomy" $taxonomy }}">{{ partial "t.html" (dict "k" "taxonomy" "lang" $lang "x" $taxonomy) }}</a>
+        {{- end }}
+      {{- end }}
+      {{- if eq .Page.Type "post" }}
+      <a href="{{ url.Rel "rss.xml" }}">{{ partial "icon.html" "rss" }}RSS</a>
+      {{- end }}
+    </p>
+  </header>
+  {{ partial "post-list.html" . }}
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}

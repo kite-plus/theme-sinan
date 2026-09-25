@@ -1,0 +1,19 @@
+{{- /* The social links as icons. Called with the page's context. */ -}}
+{{- $social := .Site.ThemeSettings.social -}}
+{{- if and $social (or $social.github $social.x $social.discord $social.email) }}
+<div class="social">
+  {{- with $social.github }}
+  <a class="icon-button" href="{{ . }}" target="_blank" rel="noopener" title="GitHub" aria-label="GitHub">{{ partial "icon.html" "github" }}</a>
+  {{- end }}
+  {{- with $social.x }}
+  <a class="icon-button" href="{{ . }}" target="_blank" rel="noopener" title="X" aria-label="X">{{ partial "icon.html" "x" }}</a>
+  {{- end }}
+  {{- with $social.discord }}
+  <a class="icon-button" href="{{ . }}" target="_blank" rel="noopener" title="Discord" aria-label="Discord">{{ partial "icon.html" "discord" }}</a>
+  {{- end }}
+  {{- with $social.email }}
+  {{- $email := partial "t.html" (dict "k" "email" "lang" $.Site.Language) }}
+  <a class="icon-button" href="mailto:{{ . }}" title="{{ $email }}" aria-label="{{ $email }}">{{ partial "icon.html" "email" }}</a>
+  {{- end }}
+</div>
+{{- end }}

@@ -1,0 +1,13 @@
+{{- /* Runs before the first paint, so a reader who chose a scheme never sees
+       a flash of the other one. The key is the one the default theme uses,
+       so the choice survives a site switching themes. */ -}}
+<script>
+  (function () {
+    try {
+      var choice = localStorage.getItem("kite-theme");
+      if (choice === "light" || choice === "dark") {
+        document.documentElement.setAttribute("data-theme", choice);
+      }
+    } catch (e) {}
+  })();
+</script>

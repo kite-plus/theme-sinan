@@ -1,0 +1,53 @@
+{{- $s := .Site.ThemeSettings -}}
+{{- $lang := .Site.Language -}}
+{{- $kind := printf "%s" .Page.Kind -}}
+{{- /* A page listed in the docs tree is drawn with the tree beside it,
+       unless it asked for the wide layout, which is drawn without. */ -}}
+{{- $inTree := and (eq $kind "single") (ne (printf "%v" .Page.Params.layout) "wide") (partial "tree-has.html" (dict "site" .Site "url" .Page.RelPermalink)) -}}
+<!DOCTYPE html>
+<html lang="{{ $lang }}"{{ with $s.color_scheme }}{{ if or (eq . "light") (eq . "dark") }} data-theme="{{ . }}"{{ end }}{{ end }}>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if eq $kind "home" }}{{ .Site.Title }}{{ else }}{{ partial "t.html" (dict "k" "title" "lang" $lang "page" .Page) }} · {{ .Site.Title }}{{ end }}</title>
+  {{- $description := .Site.Description }}
+  {{- with .Page.Description }}{{ $description = . }}{{ end }}
+  {{- with $description }}
+  <meta name="description" content="{{ . }}">
+  {{- end }}
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ url.Rel "rss.xml" }}">
+  {{- with $s.favicon }}
+  <link rel="icon" href="{{ url.Rel . }}">
+  {{- end }}
+  {{ partial "theme-init.html" . }}
+  <link rel="stylesheet" href="{{ url.Rel "sinan/sinan.css" }}">
+  {{- with $s.accent }}
+  <style>:root { --accent-base: {{ . }}; }</style>
+  {{- end }}
+  <script src="{{ url.Rel "sinan/sinan.js" }}" defer></script>
+  {{- with $s.head_html }}
+  {{ safeHTML . }}
+  {{- end }}
+  {{ block "head" . }}{{ end }}
+</head>
+<body{{ if $inTree }} class="has-tree"{{ end }}
+  data-copy="{{ partial "t.html" (dict "k" "copy" "lang" $lang) }}"
+  data-copied="{{ partial "t.html" (dict "k" "copied" "lang" $lang) }}"
+  data-anchor="{{ partial "t.html" (dict "k" "anchor" "lang" $lang) }}"
+  data-search-label="{{ partial "t.html" (dict "k" "search_label" "lang" $lang) }}"
+  data-search-placeholder="{{ partial "t.html" (dict "k" "search_placeholder" "lang" $lang) }}"
+  data-search-empty="{{ partial "t.html" (dict "k" "search_empty" "lang" $lang) }}">
+  <a class="skip" href="#main">{{ partial "t.html" (dict "k" "skip" "lang" $lang) }}</a>
+  {{- /* The menu of a narrow screen. A checkbox opens it without a script,
+         and it sits before everything it opens, as the stylesheet needs. */}}
+  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-controls="sidebar" aria-label="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}">
+  {{ partial "announcement.html" . }}
+  {{ partial "header.html" . }}
+  <label for="nav-toggle" class="backdrop" aria-hidden="true"></label>
+  <div class="layout">
+    {{ partial "sidebar.html" . }}
+    <main id="main" class="main">{{ block "main" . }}{{ end }}</main>
+  </div>
+  {{ partial "footer.html" . }}
+</body>
+</html>

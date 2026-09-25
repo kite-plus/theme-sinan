@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{- $lang := .Site.Language -}}
+<div class="listing">
+  <header class="listing-header">
+    <h1>{{ partial "t.html" (dict "k" "title" "lang" $lang "page" .Page) }}</h1>
+  </header>
+  <ul class="term-cloud">
+    {{- range .Terms }}
+    <li><a class="chip" href="{{ .RelPermalink }}">{{ .Name }}<span class="count">{{ .Count }}</span></a></li>
+    {{- else }}
+    <li class="empty">{{ partial "t.html" (dict "k" "empty" "lang" $lang) }}</li>
+    {{- end }}
+  </ul>
+</div>
+{{ end }}

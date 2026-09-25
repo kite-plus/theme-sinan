@@ -1,0 +1,16 @@
+{{- /* The title of the group of the docs tree this page is in. Called with
+       the page's context. */ -}}
+{{- $here := .Page.RelPermalink -}}
+{{- $group := "" -}}
+{{- range .Site.ThemeSettings.sidebar }}
+  {{- $title := .title }}
+  {{- range .pages }}
+    {{- if and .label .url (not $group) }}
+      {{- $u := url.Rel .url }}
+      {{- if or (eq $u $here) (eq (printf "%s/" $u) $here) }}{{ $group = $title }}{{ end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- with $group }}
+<p class="crumb">{{ . }}</p>
+{{- end }}

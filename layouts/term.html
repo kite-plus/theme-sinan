@@ -1,0 +1,14 @@
+{{ define "main" }}
+{{- $lang := .Site.Language -}}
+<div class="listing">
+  <header class="listing-header">
+    <p class="crumb"><a href="{{ url.For "taxonomy" .Page.Type }}">{{ partial "t.html" (dict "k" "taxonomy" "lang" $lang "x" .Page.Type) }}</a></p>
+    <h1>{{ partial "t.html" (dict "k" "term" "lang" $lang "x" .Page.Type "y" .Page.Title) }}</h1>
+    {{- with .Paginator }}
+    <p class="listing-meta"><span>{{ partial "t.html" (dict "k" "total" "lang" $lang "n" .TotalItems) }}</span></p>
+    {{- end }}
+  </header>
+  {{ partial "post-list.html" . }}
+  {{ partial "pagination.html" . }}
+</div>
+{{ end }}

@@ -1,0 +1,18 @@
+{{- /* The header links. The one to where the reader is is marked, and so is
+       a link into the docs tree anywhere in the docs, and the news listing
+       anywhere in the news. Called with the page's context. */ -}}
+{{- $lang := .Site.Language -}}
+{{- $site := .Site -}}
+{{- $here := .Page.RelPermalink -}}
+{{- $kind := printf "%s" .Page.Kind -}}
+{{- $inDocs := and (eq $kind "single") (partial "tree-has.html" (dict "site" .Site "url" $here)) -}}
+{{- $inNews := and (ne $kind "home") (or (eq .Page.Type "post") (eq $kind "taxonomy") (eq $kind "term")) -}}
+{{- $news := url.For "list" "post" -}}
+{{- range .Site.ThemeSettings.nav }}
+  {{- if and .label .url }}
+    {{- $u := url.Rel .url }}
+    {{- $exact := or (eq $u $here) (eq (printf "%s/" $u) $here) }}
+    {{- $current := or $exact (and $inDocs (partial "tree-has.html" (dict "site" $site "url" $u))) (and $inNews (eq $u $news)) }}
+    {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "current" $current "exact" $exact) }}
+  {{- end }}
+{{- end -}}

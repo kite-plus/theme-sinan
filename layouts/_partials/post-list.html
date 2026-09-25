@@ -1,0 +1,19 @@
+{{- /* The entries of a listing. Called with the listing's context. */ -}}
+{{- $lang := .Site.Language -}}
+{{- $site := .Site -}}
+<ul class="post-list">
+  {{- range .Pages }}
+  <li class="post-item">
+    <time datetime="{{ time.Format "2006-01-02" .PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" .PublishDate) }}</time>
+    <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    {{- with .Excerpt }}
+    <p class="excerpt">{{ . }}</p>
+    {{- end }}
+    {{- with partial "terms.html" (dict "page" . "site" $site) }}
+    <p class="terms">{{ . }}</p>
+    {{- end }}
+  </li>
+  {{- else }}
+  <li class="empty">{{ partial "t.html" (dict "k" "empty" "lang" $lang) }}</li>
+  {{- end }}
+</ul>

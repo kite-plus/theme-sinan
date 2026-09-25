@@ -1,0 +1,6 @@
+{{- /* The terms of one page across every taxonomy, as links.
+       Called as: partial "terms.html" (dict "page" PAGE "site" .Site). */ -}}
+{{- $page := .page -}}
+{{- range .site.Taxonomies }}
+  {{- range $page.Terms . }}<a class="chip" href="{{ .RelPermalink }}">{{ .Name }}</a>{{ end }}
+{{- end -}}

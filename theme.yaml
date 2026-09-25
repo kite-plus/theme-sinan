@@ -1,0 +1,203 @@
+name: sinan
+title: Sinan
+version: 0.1.0
+apiVersion: kite/v1
+requires: ">=1.0.0 <2.0.0"
+description: A documentation theme for product docs, project sites and knowledge bases. A landing page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
+author:
+  name: Kite
+  url: https://github.com/kite-plus
+license: Apache-2.0
+homepage: https://github.com/kite-plus/theme-sinan
+tags: [docs, documentation, sans-serif, dark mode]
+screenshot: screenshot.webp
+
+capabilities: [static, dynamic]
+contentTypes: [post, page]
+taxonomies: [tags, categories]
+
+layouts:
+  - name: wide
+    label: Wide page
+    description: Uses the full width, without the docs tree or a table of contents, for a page that is not part of the docs.
+    types: [page]
+
+settings:
+  - key: brand
+    type: section
+    label: Brand
+    fields:
+      - key: logo
+        type: image
+        label: Logo
+        help: Shown before the site title in the header. An SVG, or a picture about 64 pixels tall, suits it best.
+      - key: show_title
+        type: boolean
+        label: Show the site title beside the logo
+        help: Turn it off when the logo already spells the name.
+        default: true
+      - key: favicon
+        type: image
+        label: Site icon
+        help: Shown in browser tabs and bookmarks. A square picture of at least 64 pixels suits it best.
+      - key: accent
+        type: color
+        label: Accent color
+        help: Links, the current page in the docs tree, and buttons. Pick one dark enough for white text on it; on a dark page the theme lightens it by itself.
+        default: "#3d65bd"
+        options:
+          - {value: "#3d65bd", label: Kite blue}
+          - {value: "#0f766e", label: Teal}
+          - {value: "#6d4fc2", label: Violet}
+          - {value: "#b4530e", label: Rust}
+      - key: color_scheme
+        type: select
+        label: Light or dark
+        help: What a reader sees first. They can still switch with the button in the header.
+        default: auto
+        options:
+          - {value: auto, label: Follow the reader's system}
+          - {value: light, label: Light}
+          - {value: dark, label: Dark}
+
+  - key: navigation
+    type: section
+    label: Navigation
+    fields:
+      - key: nav
+        type: repeat
+        label: Header links
+        help: An address within the site starts with a slash. A link to another site opens in a new tab.
+        fields:
+          - {key: label, type: string, label: Label, placeholder: Guide}
+          - {key: url, type: url, label: Address, placeholder: /introduction/}
+      - key: sidebar
+        type: repeat
+        label: Docs tree
+        help: The groups of the sidebar and the pages in each, in reading order. A page listed here is drawn with the tree beside it, and its previous and next links follow this order.
+        fields:
+          - {key: title, type: string, label: Group title, placeholder: Getting started}
+          - key: pages
+            type: repeat
+            label: Pages
+            fields:
+              - {key: label, type: string, label: Title, placeholder: Introduction}
+              - {key: url, type: url, label: Address, placeholder: /introduction/}
+
+  - key: notice
+    type: section
+    label: Announcement
+    fields:
+      - key: announcement
+        type: boolean
+        label: Show an announcement bar
+        help: A line above the header on every page, for a release or an event.
+        default: false
+      - key: announcement_text
+        type: string
+        label: Text
+        placeholder: Version 1.0 is out
+        showIf: {announcement: true}
+      - key: announcement_link
+        type: url
+        label: Link
+        help: Left empty, the bar is not a link.
+        placeholder: /posts/version-1-0/
+        showIf: {announcement: true}
+
+  - key: home
+    type: section
+    label: Home page
+    fields:
+      - key: hero_title
+        type: string
+        label: Headline
+        help: Left empty, the site title is used.
+      - key: hero_text
+        type: text
+        label: Tagline
+        help: A sentence or two under the headline. Left empty, the site description is used.
+      - key: hero_image
+        type: image
+        label: Picture
+        help: Drawn beside the headline on a wide screen, such as a screenshot of the product or a large logo.
+      - key: actions
+        type: repeat
+        label: Buttons
+        help: The first one is the main button. Left empty, the home page links to the first page of the docs tree.
+        fields:
+          - {key: label, type: string, label: Label, placeholder: Get started}
+          - {key: url, type: url, label: Address, placeholder: /introduction/}
+      - key: features
+        type: repeat
+        label: Features
+        help: Cards under the headline, each a title and a sentence, and a link if it has one.
+        fields:
+          - {key: title, type: string, label: Title}
+          - {key: text, type: text, label: Text}
+          - {key: link, type: url, label: Link}
+      - key: show_news
+        type: boolean
+        label: Show the latest news
+        help: The three newest posts, under the features.
+        default: true
+
+  - key: docs
+    type: section
+    label: Docs
+    fields:
+      - key: show_toc
+        type: boolean
+        label: Show a table of contents
+        help: Beside a page with at least two headings, or above it on a narrow screen.
+        default: true
+      - key: show_updated
+        type: boolean
+        label: Show when a page was last updated
+        help: Taken from the page's updated_at, or its date when it has none.
+        default: true
+
+  - key: community
+    type: section
+    label: Social
+    fields:
+      - key: social
+        type: group
+        label: Social links
+        help: Shown as icons in the header and the footer.
+        fields:
+          - {key: github, type: url, label: GitHub, placeholder: https://github.com/you/project}
+          - {key: x, type: url, label: X, placeholder: https://x.com/you}
+          - {key: discord, type: url, label: Discord, placeholder: https://discord.gg/invite}
+          - {key: email, type: string, label: Email, placeholder: hello@example.com}
+
+  - key: footer
+    type: section
+    label: Footer
+    fields:
+      - key: footer_columns
+        type: repeat
+        label: Link columns
+        help: Each column is a title over a few links.
+        fields:
+          - {key: title, type: string, label: Column title, placeholder: Docs}
+          - key: links
+            type: repeat
+            label: Links
+            fields:
+              - {key: label, type: string, label: Label}
+              - {key: url, type: url, label: Address}
+      - key: copyright
+        type: string
+        label: Copyright
+        help: Left empty, the site is credited to itself for the year it was last built.
+
+  - key: advanced
+    type: section
+    label: Advanced
+    fields:
+      - key: head_html
+        type: code
+        language: html
+        label: Extra HTML in the page head
+        help: Added to every page as it is written, such as an analytics snippet. It is not checked, so paste only what you trust.

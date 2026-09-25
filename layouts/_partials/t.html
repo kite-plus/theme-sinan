@@ -1,0 +1,69 @@
+{{- /*
+  Every word the theme itself says, in one place.
+
+  Called as: partial "t.html" (dict "k" KEY "lang" .Site.Language ...), with
+  "n" for a number, "x" and "y" for names, "t" for a time and "page" for a page where
+  a key needs one. A site language starting with "zh" reads Chinese; any other
+  reads English. A site can translate the theme by overriding this one file.
+*/ -}}
+{{- $zh := str.HasPrefix "zh" (str.Lower .lang) -}}
+{{- if eq .k "skip" }}{{ if $zh }}跳到正文{{ else }}Skip to content{{ end }}
+{{- else if eq .k "menu" }}{{ if $zh }}菜单{{ else }}Menu{{ end }}
+{{- else if eq .k "main_nav" }}{{ if $zh }}主导航{{ else }}Main{{ end }}
+{{- else if eq .k "docs" }}{{ if $zh }}文档{{ else }}Docs{{ end }}
+{{- else if eq .k "search" }}{{ if $zh }}搜索{{ else }}Search{{ end }}
+{{- else if eq .k "search_label" }}{{ if $zh }}搜索文档{{ else }}Search the docs{{ end }}
+{{- else if eq .k "search_placeholder" }}{{ if $zh }}按标题查找文档{{ else }}Find a page by its title{{ end }}
+{{- else if eq .k "search_empty" }}{{ if $zh }}没有标题相符的页面{{ else }}No page has a title like that{{ end }}
+{{- else if eq .k "close" }}{{ if $zh }}关闭{{ else }}Close{{ end }}
+{{- else if eq .k "toggle" }}{{ if $zh }}切换深浅色{{ else }}Switch between light and dark{{ end }}
+{{- else if eq .k "on_this_page" }}{{ if $zh }}本页目录{{ else }}On this page{{ end }}
+{{- else if eq .k "prev" }}{{ if $zh }}上一页{{ else }}Previous{{ end }}
+{{- else if eq .k "next" }}{{ if $zh }}下一页{{ else }}Next{{ end }}
+{{- else if eq .k "newer_post" }}{{ if $zh }}较新的一篇{{ else }}Newer post{{ end }}
+{{- else if eq .k "older_post" }}{{ if $zh }}较早的一篇{{ else }}Older post{{ end }}
+{{- else if eq .k "newer" }}{{ if $zh }}较新{{ else }}Newer{{ end }}
+{{- else if eq .k "older" }}{{ if $zh }}较早{{ else }}Older{{ end }}
+{{- else if eq .k "news" }}{{ if $zh }}新闻{{ else }}News{{ end }}
+{{- else if eq .k "latest_news" }}{{ if $zh }}最新动态{{ else }}Latest news{{ end }}
+{{- else if eq .k "all_news" }}{{ if $zh }}全部新闻{{ else }}All news{{ end }}
+{{- else if eq .k "get_started" }}{{ if $zh }}开始阅读{{ else }}Get started{{ end }}
+{{- else if eq .k "updated" }}{{ if $zh }}最后更新于 {{ time.Format "2006 年 1 月 2 日" .t }}{{ else }}Last updated on {{ time.Format "January 2, 2006" .t }}{{ end }}
+{{- else if eq .k "date" }}{{ if $zh }}{{ time.Format "2006 年 1 月 2 日" .t }}{{ else }}{{ time.Format "January 2, 2006" .t }}{{ end }}
+{{- else if eq .k "total" }}{{ if $zh }}共 {{ .n }} 篇{{ else if eq .n 1 }}1 post{{ else }}{{ .n }} posts{{ end }}
+{{- else if eq .k "empty" }}{{ if $zh }}这里还没有文章。{{ else }}Nothing here yet.{{ end }}
+{{- else if eq .k "notfound" }}{{ if $zh }}页面不存在{{ else }}Page not found{{ end }}
+{{- else if eq .k "notfound_body" }}{{ if $zh }}这个地址下没有内容，它可能已经移到了别处。{{ else }}Nothing lives at this address. It may have moved.{{ end }}
+{{- else if eq .k "back_home" }}{{ if $zh }}回到首页{{ else }}Back home{{ end }}
+{{- else if eq .k "copy" }}{{ if $zh }}复制{{ else }}Copy{{ end }}
+{{- else if eq .k "copied" }}{{ if $zh }}已复制{{ else }}Copied{{ end }}
+{{- else if eq .k "anchor" }}{{ if $zh }}这一节的链接{{ else }}Link to this section{{ end }}
+{{- else if eq .k "email" }}{{ if $zh }}邮件{{ else }}Email{{ end }}
+{{- else if eq .k "new_tab" }}{{ if $zh }}（在新标签页打开）{{ else }} (opens in a new tab){{ end }}
+{{- else if eq .k "powered_pre" }}{{ if $zh }}由 {{ else }}Powered by {{ end }}
+{{- else if eq .k "powered_post" }}{{ if $zh }} 驱动{{ end }}
+{{- else if eq .k "taxonomy" }}
+  {{- if not $zh }}{{ str.Title .x }}
+  {{- else if eq .x "tags" }}标签
+  {{- else if eq .x "categories" }}分类
+  {{- else }}{{ .x }}{{ end }}
+{{- else if eq .k "term" }}
+  {{- /* The heading of a term's page: .x is the taxonomy, .y the term. */ -}}
+  {{- if $zh }}
+    {{- if eq .x "tags" }}标签「{{ .y }}」下的文章
+    {{- else if eq .x "categories" }}分类「{{ .y }}」下的文章
+    {{- else }}「{{ .y }}」下的文章{{ end }}
+  {{- else if eq .x "tags" }}Posts tagged “{{ .y }}”
+  {{- else }}Posts in “{{ .y }}”{{ end }}
+{{- else if eq .k "title" }}
+  {{- /* What a page calls itself. Kite names listings in English, so the
+         listings the theme knows are renamed and the rest kept. */ -}}
+  {{- $kind := printf "%s" .page.Kind -}}
+  {{- if eq $kind "404" }}{{ if $zh }}页面不存在{{ else }}Page not found{{ end }}
+  {{- else if and (eq $kind "list") (eq .page.Type "post") }}{{ if $zh }}新闻{{ else }}News{{ end }}
+  {{- else if and (eq $kind "list") (eq .page.Type "page") }}{{ if $zh }}页面{{ else }}Pages{{ end }}
+  {{- else if eq $kind "term" }}{{ partial "t.html" (dict "k" "term" "lang" .lang "x" .page.Type "y" .page.Title) }}
+  {{- else if and (eq $kind "taxonomy") $zh (eq .page.Type "tags") }}标签
+  {{- else if and (eq $kind "taxonomy") $zh (eq .page.Type "categories") }}分类
+  {{- else }}{{ .page.Title }}{{ end }}
+{{- end -}}

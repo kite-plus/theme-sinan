@@ -1,0 +1,155 @@
+# What Sinan says about itself in the admin, in Chinese. The keys follow
+# theme.yaml; anything missing here is shown as written there.
+theme:
+  title: 司南
+  description: 为产品文档、项目官网和知识库设计的文档主题。首页、按顺序排列的文档目录、页内目录和新闻，支持浅色与深色，不从第三方加载任何资源。
+
+  settings:
+    brand:
+      label: 品牌
+    logo:
+      label: 标志
+      help: 显示在页头的站点标题前。建议使用 SVG，或高约 64 像素的图片。
+    show_title:
+      label: 在标志旁显示站点标题
+      help: 标志里已经写着名字时可以关掉。
+    favicon:
+      label: 站点图标
+      help: 显示在浏览器标签页和书签里。建议使用至少 64 像素的正方形图片。
+    accent:
+      label: 强调色
+      help: 用于链接、文档目录里的当前页和按钮。请选择足够深、能在上面放白字的颜色；深色模式下主题会自动调亮。
+      options:
+        "#3d65bd": 风筝蓝
+        "#0f766e": 青绿
+        "#6d4fc2": 紫罗兰
+        "#b4530e": 赭橙
+    color_scheme:
+      label: 浅色或深色
+      help: 读者第一次看到的样子，之后仍可以用页头的按钮切换。
+      options:
+        auto: 跟随读者的系统
+        light: 浅色
+        dark: 深色
+
+    navigation:
+      label: 导航
+    nav:
+      label: 页头链接
+      help: 站内地址以斜杠开头；指向其他网站的链接在新标签页打开。
+      fields:
+        label:
+          label: 名称
+          placeholder: 指南
+        url:
+          label: 地址
+    sidebar:
+      label: 文档目录
+      help: 侧栏里的分组和每组的页面，按阅读顺序排列。列在这里的页面旁边会显示目录，它的上一页、下一页也按这个顺序。
+      fields:
+        title:
+          label: 分组标题
+          placeholder: 开始
+        pages:
+          label: 页面
+          fields:
+            label:
+              label: 标题
+              placeholder: 介绍
+            url:
+              label: 地址
+
+    notice:
+      label: 公告栏
+    announcement:
+      label: 显示公告栏
+      help: 每个页面页头上方的一行字，适合发布新版本或活动时使用。
+    announcement_text:
+      label: 文字
+      placeholder: 1.0 版已发布
+    announcement_link:
+      label: 链接
+      help: 留空时公告栏不是链接。
+
+    home:
+      label: 首页
+    hero_title:
+      label: 标题
+      help: 留空时使用站点标题。
+    hero_text:
+      label: 标语
+      help: 标题下的一两句话。留空时使用站点描述。
+    hero_image:
+      label: 配图
+      help: 宽屏时显示在标题旁，例如产品截图或大号标志。
+    actions:
+      label: 按钮
+      help: 第一个是主按钮。留空时首页链接到文档目录的第一页。
+      fields:
+        label:
+          label: 文字
+          placeholder: 开始阅读
+        url:
+          label: 地址
+    features:
+      label: 特性
+      help: 标题下的卡片，每张一个标题和一句话，填了链接就能点。
+      fields:
+        title:
+          label: 标题
+        text:
+          label: 文字
+        link:
+          label: 链接
+    show_news:
+      label: 显示最新动态
+      help: 在特性下面列出最新的三篇文章。
+
+    docs:
+      label: 文档
+    show_toc:
+      label: 显示页内目录
+      help: 有两个以上小标题的页面会在旁边显示目录，窄屏时显示在正文上方。
+    show_updated:
+      label: 显示最后更新时间
+      help: 取页面的 updated_at，没有时取它的日期。
+
+    community:
+      label: 社交
+    social:
+      label: 社交链接
+      help: 以图标显示在页头和页脚。
+      fields:
+        email:
+          label: 邮箱
+
+    footer:
+      label: 页脚
+    footer_columns:
+      label: 链接栏
+      help: 每一栏是一个标题加几条链接。
+      fields:
+        title:
+          label: 栏目标题
+          placeholder: 文档
+        links:
+          label: 链接
+          fields:
+            label:
+              label: 名称
+            url:
+              label: 地址
+    copyright:
+      label: 版权信息
+      help: 留空时，署名为站点本身，年份为最后一次构建的年份。
+
+    advanced:
+      label: 高级
+    head_html:
+      label: 页面 head 中的额外 HTML
+      help: 原样加到每个页面，例如统计代码。它不会被检查，请只粘贴你信任的内容。
+
+  layouts:
+    wide:
+      label: 宽页面
+      description: 占满整个宽度，不显示文档目录和页内目录，适合不属于文档的页面。

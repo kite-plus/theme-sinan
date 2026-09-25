@@ -1,0 +1,90 @@
+{{ define "main" }}
+{{- $s := .Site.ThemeSettings -}}
+{{- $lang := .Site.Language -}}
+{{- $site := .Site -}}
+{{- if and .Paginator (gt .Paginator.PageNumber 1) }}
+  {{- /* Kite pages the home page by the news, so a later page of it is a
+         page of the news. */}}
+<div class="listing">
+  <header class="listing-header">
+    <h1>{{ partial "t.html" (dict "k" "news" "lang" $lang) }}</h1>
+  </header>
+  {{ partial "post-list.html" . }}
+  {{ partial "pagination.html" . }}
+</div>
+{{- else }}
+<section class="hero{{ if $s.hero_image }} with-image{{ end }}">
+  <div class="hero-text">
+    <h1 class="hero-title">{{ with $s.hero_title }}{{ . }}{{ else }}{{ $site.Title }}{{ end }}</h1>
+    {{- $tagline := $s.hero_text }}
+    {{- if not $tagline }}{{ $tagline = $site.Description }}{{ end }}
+    {{- with $tagline }}
+    <p class="hero-tagline">{{ . }}</p>
+    {{- end }}
+    {{- $first := "" }}
+    {{- range $s.sidebar }}{{ range .pages }}{{ if and .label .url (not $first) }}{{ $first = .url }}{{ end }}{{ end }}{{ end }}
+    {{- $any := false }}
+    {{- range $s.actions }}{{ if and .label .url }}{{ $any = true }}{{ end }}{{ end }}
+    {{- if $any }}
+    <div class="hero-actions">
+      {{- $main := true }}
+      {{- range $s.actions }}
+        {{- if and .label .url }}
+          {{- $class := "button" }}
+          {{- if $main }}{{ $class = "button primary" }}{{ end }}
+      {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "class" $class) }}
+          {{- $main = false }}
+        {{- end }}
+      {{- end }}
+    </div>
+    {{- else if $first }}
+    <div class="hero-actions">
+      {{ partial "link.html" (dict "label" (partial "t.html" (dict "k" "get_started" "lang" $lang)) "url" $first "lang" $lang "class" "button primary") }}
+    </div>
+    {{- end }}
+  </div>
+  {{- with $s.hero_image }}
+  <div class="hero-image"><img src="{{ url.Rel . }}" alt=""></div>
+  {{- end }}
+</section>
+{{- $features := false }}
+{{- range $s.features }}{{ if or .title .text }}{{ $features = true }}{{ end }}{{ end }}
+{{- if $features }}
+<section class="features">
+  {{- range $s.features }}
+    {{- if or .title .text }}
+      {{- if .link }}
+  <a class="feature" href="{{ url.Rel .link }}">
+      {{- else }}
+  <div class="feature">
+      {{- end }}
+    {{- with .title }}<h2>{{ . }}</h2>{{ end }}
+    {{- with .text }}<p>{{ . }}</p>{{ end }}
+      {{- if .link }}</a>{{ else }}</div>{{ end }}
+    {{- end }}
+  {{- end }}
+</section>
+{{- end }}
+{{- if and $s.show_news .Pages }}
+<section class="home-news">
+  <div class="home-news-header">
+    <h2>{{ partial "t.html" (dict "k" "latest_news" "lang" $lang) }}</h2>
+    <a href="{{ url.For "list" "post" }}">{{ partial "t.html" (dict "k" "all_news" "lang" $lang) }} →</a>
+  </div>
+  <ul class="post-list">
+    {{- range $i, $p := .Pages }}
+      {{- if lt $i 3 }}
+    <li class="post-item">
+      <time datetime="{{ time.Format "2006-01-02" $p.PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" $p.PublishDate) }}</time>
+      <h3><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h3>
+      {{- with $p.Excerpt }}
+      <p class="excerpt">{{ . }}</p>
+      {{- end }}
+    </li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+{{- end }}
+{{ end }}

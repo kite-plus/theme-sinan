@@ -1,0 +1,10 @@
+{{- $s := .Site.ThemeSettings -}}
+{{- if and $s.announcement $s.announcement_text }}
+<div class="announcement">
+  {{- with $s.announcement_link }}
+  <a href="{{ url.Rel . }}">{{ $s.announcement_text }}<span aria-hidden="true"> →</span></a>
+  {{- else }}
+  <p>{{ $s.announcement_text }}</p>
+  {{- end }}
+</div>
+{{- end }}

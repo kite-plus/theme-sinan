@@ -1,0 +1,35 @@
+{{- /* The docs tree, drawn beside a page in it. On a narrow screen it is the
+       drawer the menu button opens, with the header links above the tree,
+       on every page. */ -}}
+{{- $lang := .Site.Language -}}
+{{- $here := .Page.RelPermalink -}}
+<aside class="sidebar" id="sidebar">
+  {{- with .Site.ThemeSettings.nav }}
+  <nav class="drawer-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
+    {{- partial "nav-links.html" $ }}
+  </nav>
+  {{- end }}
+  {{- with .Site.ThemeSettings.sidebar }}
+  <nav class="tree" aria-label="{{ partial "t.html" (dict "k" "docs" "lang" $lang) }}">
+    {{- range . }}
+      {{- $listed := false }}
+      {{- range .pages }}{{ if and .label .url }}{{ $listed = true }}{{ end }}{{ end }}
+      {{- if $listed }}
+    <div class="group">
+      {{- with .title }}
+      <p class="group-title">{{ . }}</p>
+      {{- end }}
+      <ul>
+        {{- range .pages }}
+          {{- if and .label .url }}
+          {{- $u := url.Rel .url }}
+        <li><a href="{{ $u }}"{{ if or (eq $u $here) (eq (printf "%s/" $u) $here) }} aria-current="page"{{ end }}>{{ .label }}</a></li>
+          {{- end }}
+        {{- end }}
+      </ul>
+    </div>
+      {{- end }}
+    {{- end }}
+  </nav>
+  {{- end }}
+</aside>

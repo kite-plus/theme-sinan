@@ -1,0 +1,29 @@
+{{- $lang := .Site.Language -}}
+{{- $s := .Site.ThemeSettings -}}
+<header class="site-header">
+  <div class="header-inner">
+    {{- if or $s.nav $s.sidebar }}
+    {{- /* The menu is the checkbox before the header, which works without a
+           script; this label is only its face, so it is hidden from
+           assistive technology, which reaches the checkbox itself. */}}
+    <label for="nav-toggle" class="menu-button icon-button" title="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}" aria-hidden="true">{{ partial "icon.html" "menu" }}</label>
+    {{- end }}
+    <a class="brand" href="{{ url.For "home" }}">
+      {{- with $s.logo }}<img class="logo" src="{{ url.Rel . }}" alt="">{{ end }}
+      {{- if or $s.show_title (not $s.logo) }}<span class="brand-name">{{ .Site.Title }}</span>
+      {{- else }}<span class="sr-only">{{ .Site.Title }}</span>{{ end -}}
+    </a>
+    {{- with $s.nav }}
+    <nav class="header-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
+      {{- partial "nav-links.html" $ }}
+    </nav>
+    {{- end }}
+    <div class="header-tools">
+      {{- $search := partial "t.html" (dict "k" "search_label" "lang" $lang) }}
+      <button type="button" class="search-button" data-search aria-label="{{ $search }}" hidden>{{ partial "icon.html" "search" }}<span class="search-text">{{ partial "t.html" (dict "k" "search" "lang" $lang) }}</span><kbd>/</kbd></button>
+      {{- partial "social.html" . }}
+      {{- $toggle := partial "t.html" (dict "k" "toggle" "lang" $lang) }}
+      <button type="button" class="icon-button theme-toggle" data-theme-toggle title="{{ $toggle }}" aria-label="{{ $toggle }}" hidden><span class="moon">{{ partial "icon.html" "moon" }}</span><span class="sun">{{ partial "icon.html" "sun" }}</span></button>
+    </div>
+  </div>
+</header>
