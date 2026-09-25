@@ -1,10 +1,19 @@
 {{- $lang := .Site.Language -}}
 {{- $s := .Site.ThemeSettings -}}
+{{- $columns := len $s.footer_columns -}}
 <footer class="site-footer">
   <div class="footer-inner">
-    {{- with $s.footer_columns }}
-    <div class="footer-columns">
-      {{- range . }}
+    {{- /* The site on the left, and its columns of links sharing the rest
+           evenly, however many there are. */}}
+    <div class="footer-main{{ if $columns }} has-columns{{ end }}"{{ if $columns }} style="--columns: {{ $columns }}"{{ end }}>
+      <div class="footer-brand">
+        {{ partial "brand.html" . }}
+        {{- with .Site.Description }}
+        <p class="footer-description">{{ . }}</p>
+        {{- end }}
+        {{- partial "social.html" . }}
+      </div>
+      {{- range $s.footer_columns }}
       <div class="footer-column">
         {{- with .title }}
         <p class="footer-title">{{ . }}</p>
@@ -19,11 +28,12 @@
       </div>
       {{- end }}
     </div>
-    {{- end }}
     <div class="footer-bottom">
       <p class="copyright">{{ with $s.copyright }}{{ . }}{{ else }}&copy; {{ time.Format "2006" .Site.BuildTime }} {{ .Site.Title }}{{ end }}</p>
-      <p class="credit"><a href="{{ url.Rel "rss.xml" }}">RSS</a> · {{ partial "t.html" (dict "k" "powered_pre" "lang" $lang) }}<a href="https://github.com/kite-plus/kite" rel="noopener">Kite</a>{{ partial "t.html" (dict "k" "powered_post" "lang" $lang) }}</p>
-      {{- partial "social.html" . }}
+      <p class="credit">
+        <a href="{{ url.Rel "rss.xml" }}">{{ partial "icon.html" "rss" }}RSS</a>
+        <span class="powered">{{ partial "t.html" (dict "k" "powered_pre" "lang" $lang) }}<a href="https://github.com/kite-plus/kite" rel="noopener">{{ partial "icon.html" "kite" }}Kite</a>{{ partial "t.html" (dict "k" "powered_post" "lang" $lang) }}</span>
+      </p>
     </div>
   </div>
 </footer>

@@ -68,8 +68,13 @@ theme:
           - {label: Introduction, url: /introduction/}
           - {label: Quick start, url: /quick-start/}
           - {label: Settings reference, url: /settings-reference/}
+      - title: News
+        links:
+          - {label: All news, url: /posts/}
+          - {label: Tags, url: /tags/}
+          - {label: RSS feed, url: /rss.xml}
       - title: Kite
         links:
           - {label: Kite on GitHub, url: https://github.com/kite-plus/kite}
-          - {label: News, url: /posts/}
+          - {label: Kite Plus, url: https://github.com/kite-plus}
     copyright: © 2026 Kite Plus. Released under the Apache License 2.0.

@@ -8,11 +8,7 @@
            assistive technology, which reaches the checkbox itself. */}}
     <label for="nav-toggle" class="menu-button icon-button" title="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}" aria-hidden="true">{{ partial "icon.html" "menu" }}</label>
     {{- end }}
-    <a class="brand" href="{{ url.For "home" }}">
-      {{- with $s.logo }}<img class="logo" src="{{ url.Rel . }}" alt="">{{ end }}
-      {{- if or $s.show_title (not $s.logo) }}<span class="brand-name">{{ .Site.Title }}</span>
-      {{- else }}<span class="sr-only">{{ .Site.Title }}</span>{{ end -}}
-    </a>
+    {{ partial "brand.html" . }}
     {{- with $s.nav }}
     <nav class="header-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
       {{- partial "nav-links.html" $ }}

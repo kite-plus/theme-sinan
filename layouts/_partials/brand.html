@@ -1,0 +1,9 @@
+{{- /* The site's logo and title, linking home, in the header and the footer.
+       Called with the page's context. */ -}}
+{{- $s := .Site.ThemeSettings -}}
+<a class="brand" href="{{ url.For "home" }}">
+  {{- with $s.logo }}<img class="logo" src="{{ url.Rel . }}" alt="">{{ end }}
+  {{- if or $s.show_title (not $s.logo) }}<span class="brand-name">{{ .Site.Title }}</span>
+  {{- else }}<span class="sr-only">{{ .Site.Title }}</span>{{ end -}}
+</a>
+{{- /**/ -}}
