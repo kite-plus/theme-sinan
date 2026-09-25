@@ -1,0 +1,75 @@
+# An example site that uses Sinan, for developing the theme and for its
+# screenshot. themes/sinan links to the root of this repository.
+site:
+  title: Sinan
+  description: A documentation theme for Kite
+  baseURL: http://localhost:1818
+  language: en
+
+content:
+  store: file
+  dir: content
+
+build:
+  output: public
+
+theme:
+  name: sinan
+  settings:
+    nav:
+      - {label: Docs, url: /introduction/}
+      - {label: News, url: /posts/}
+      - {label: Kite, url: https://github.com/kite-plus/kite}
+    sidebar:
+      - title: Getting started
+        pages:
+          - {label: Introduction, url: /introduction/}
+          - {label: Quick start, url: /quick-start/}
+          - {label: Installing a theme, url: /installing-a-theme/}
+      - title: Configuration
+        pages:
+          - {label: Brand and colors, url: /brand-and-colors/}
+          - {label: Navigation and the docs tree, url: /navigation-and-the-docs-tree/}
+          - {label: The home page, url: /the-home-page/}
+      - title: Writing
+        pages:
+          - {label: Writing docs, url: /writing-docs/}
+          - {label: Markdown reference, url: /markdown-reference/}
+      - title: Reference
+        pages:
+          - {label: Settings reference, url: /settings-reference/}
+    announcement: true
+    announcement_text: Sinan is in early development, and its settings may still change.
+    announcement_link: /posts/sinan-0-1/
+    hero_title: Docs that show the way
+    hero_text: Sinan is a documentation theme for Kite. A home page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
+    hero_image: /images/sinan.svg
+    actions:
+      - {label: Get started, url: /introduction/}
+      - {label: Quick start, url: /quick-start/}
+    features:
+      - title: Docs in reading order
+        text: Groups and pages in the order you choose, with previous and next links that follow it.
+        link: /navigation-and-the-docs-tree/
+      - title: Configured in the studio
+        text: Every setting is a form in Kite's studio, tried on the whole site before you save.
+        link: /settings-reference/
+      - title: Light and dark
+        text: Follows the reader's system, remembers their choice, and keeps its contrast either way.
+        link: /brand-and-colors/
+      - title: Nothing from third parties
+        text: No web fonts and no scripts from elsewhere. Every page works without a script.
+        link: /introduction/
+    social:
+      github: https://github.com/kite-plus
+    footer_columns:
+      - title: Docs
+        links:
+          - {label: Introduction, url: /introduction/}
+          - {label: Quick start, url: /quick-start/}
+          - {label: Settings reference, url: /settings-reference/}
+      - title: Kite
+        links:
+          - {label: Kite on GitHub, url: https://github.com/kite-plus/kite}
+          - {label: News, url: /posts/}
+    copyright: © 2026 Kite Plus. Released under the Apache License 2.0.

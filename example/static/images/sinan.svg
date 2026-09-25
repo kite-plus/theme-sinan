@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 360" width="440" height="360" role="img" aria-label="A sinan, the south-pointing spoon, on its plate">
+  <style>
+    .plate { fill: #eef2fb; stroke: #3d65bd; stroke-opacity: .28; }
+    .frame { fill: none; stroke: #3d65bd; stroke-opacity: .22; }
+    .face { fill: #ffffff; stroke: #3d65bd; stroke-opacity: .45; }
+    .tick { stroke: #3d65bd; stroke-opacity: .4; stroke-width: 2; stroke-linecap: round; }
+    .tick.major { stroke-opacity: .75; stroke-width: 3; }
+    .shine { fill: #ffffff; fill-opacity: .38; }
+    @media (prefers-color-scheme: dark) {
+      .plate { fill: #161d2b; stroke: #8aa6e0; }
+      .frame { stroke: #8aa6e0; }
+      .face { fill: #0f1216; stroke: #8aa6e0; }
+      .tick { stroke: #8aa6e0; }
+      .shine { fill-opacity: .22; }
+    }
+  </style>
+  <defs>
+    <linearGradient id="spoon" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#2f539f"/>
+      <stop offset="1" stop-color="#6d8fd9"/>
+    </linearGradient>
+  </defs>
+  <rect class="plate" x="70" y="30" width="300" height="300" rx="26" stroke-width="1.5"/>
+  <rect class="frame" x="92" y="52" width="256" height="256" rx="16" stroke-width="1.5"/>
+  <line x1="220.0" y1="80.0" x2="220.0" y2="62.0" class="tick major"/>
+  <line x1="246.9" y1="79.5" x2="249.2" y2="70.9" class="tick"/>
+  <line x1="272.0" y1="89.9" x2="276.5" y2="82.1" class="tick"/>
+  <line x1="293.5" y1="106.5" x2="299.9" y2="100.1" class="tick"/>
+  <line x1="310.1" y1="128.0" x2="317.9" y2="123.5" class="tick"/>
+  <line x1="320.5" y1="153.1" x2="329.1" y2="150.8" class="tick"/>
+  <line x1="320.0" y1="180.0" x2="338.0" y2="180.0" class="tick major"/>
+  <line x1="320.5" y1="206.9" x2="329.1" y2="209.2" class="tick"/>
+  <line x1="310.1" y1="232.0" x2="317.9" y2="236.5" class="tick"/>
+  <line x1="293.5" y1="253.5" x2="299.9" y2="259.9" class="tick"/>
+  <line x1="272.0" y1="270.1" x2="276.5" y2="277.9" class="tick"/>
+  <line x1="246.9" y1="280.5" x2="249.2" y2="289.1" class="tick"/>
+  <line x1="220.0" y1="280.0" x2="220.0" y2="298.0" class="tick major"/>
+  <line x1="193.1" y1="280.5" x2="190.8" y2="289.1" class="tick"/>
+  <line x1="168.0" y1="270.1" x2="163.5" y2="277.9" class="tick"/>
+  <line x1="146.5" y1="253.5" x2="140.1" y2="259.9" class="tick"/>
+  <line x1="129.9" y1="232.0" x2="122.1" y2="236.5" class="tick"/>
+  <line x1="119.5" y1="206.9" x2="110.9" y2="209.2" class="tick"/>
+  <line x1="120.0" y1="180.0" x2="102.0" y2="180.0" class="tick major"/>
+  <line x1="119.5" y1="153.1" x2="110.9" y2="150.8" class="tick"/>
+  <line x1="129.9" y1="128.0" x2="122.1" y2="123.5" class="tick"/>
+  <line x1="146.5" y1="106.5" x2="140.1" y2="100.1" class="tick"/>
+  <line x1="168.0" y1="89.9" x2="163.5" y2="82.1" class="tick"/>
+  <line x1="193.1" y1="79.5" x2="190.8" y2="70.9" class="tick"/>
+  <circle class="face" cx="220" cy="180" r="90" stroke-width="2"/>
+  <g transform="rotate(-42 220 180)">
+    <path d="M 216 171 L 324 177 Q 330 180 324 183 L 216 189 Z" fill="url(#spoon)"/>
+    <ellipse cx="196" cy="180" rx="46" ry="33" fill="url(#spoon)"/>
+    <ellipse class="shine" cx="186" cy="170" rx="20" ry="9"/>
+  </g>
+  <circle cx="220" cy="180" r="3" fill="#ffffff" fill-opacity=".8"/>
+</svg>
