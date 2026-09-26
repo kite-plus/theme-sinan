@@ -53,6 +53,9 @@ The studio shows these as a form under **Settings → Theme**, in the sections b
 | `features_title` | string | | A small heading over the features |
 | `features` | list of `title`, `text`, `link` | | The numbered grid |
 | `show_news` | boolean | `true` | Lists the three newest posts |
+| `more_title` | string | | A small heading over the closing list |
+| `more_text` | text | | A sentence under it |
+| `more` | list of `title`, `text`, `note`, `link` | | Rows at the end of the home page |
 
 ## Docs
 

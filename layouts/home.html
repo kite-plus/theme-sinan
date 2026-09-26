@@ -105,6 +105,30 @@
   </ul>
 </section>
 {{- end }}
+{{- $more := false }}
+{{- range $s.more }}{{ if .title }}{{ $more = true }}{{ end }}{{ end }}
+{{- if $more }}
+<section class="home-more">
+  {{- with $s.more_title }}
+  <h2 class="section-label">{{ . }}</h2>
+  {{- end }}
+  {{- with $s.more_text }}
+  <p class="more-text">{{ . }}</p>
+  {{- end }}
+  <ul class="news-rows">
+    {{- range $s.more }}
+      {{- if .title }}
+        {{- $external := and .link (or (str.HasPrefix "http://" .link) (str.HasPrefix "https://" .link)) }}
+    <li>{{ if .link }}<a class="news-row more-row" href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ else }}<div class="news-row more-row">{{ end }}
+      <span class="more-note">{{ .note }}</span>
+      <span class="news-title">{{ .title }}</span>
+      <span class="news-excerpt">{{ .text }}</span>
+      {{- if .link }}{{ if $external }}{{ partial "icon.html" "external" }}{{ else }}{{ partial "icon.html" "next" }}{{ end }}</a>{{ else }}</div>{{ end }}</li>
+      {{- end }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
 <div class="home-end"></div>
 {{- end }}
 {{ end }}

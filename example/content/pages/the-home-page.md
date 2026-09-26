@@ -41,3 +41,7 @@ With no buttons, the home page links to the first page of the docs tree.
 ## News
 
 `show_news` lists the three newest posts under the features. Kite pages the home page by the news, so its second page lists older posts.
+
+## A closing list
+
+`more` draws rows at the end of the home page, such as related projects: each a `title` and a `text`, a short `note` such as a status or a version, and a `link` if it has one. `more_title` and `more_text` go over them.

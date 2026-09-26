@@ -179,6 +179,24 @@ settings:
         label: Show the latest news
         help: The three newest posts, under the features.
         default: true
+      - key: more_title
+        type: string
+        label: Closing heading
+        help: A small heading over the list at the end of the home page, such as related projects.
+        placeholder: More from us
+      - key: more_text
+        type: text
+        label: Closing text
+        help: A sentence under the closing heading.
+      - key: more
+        type: repeat
+        label: Closing list
+        help: Rows at the end of the home page, each a title and a sentence, a short note such as a status, and a link if it has one.
+        fields:
+          - {key: title, type: string, label: Title}
+          - {key: text, type: text, label: Text}
+          - {key: note, type: string, label: Note, placeholder: In development}
+          - {key: link, type: url, label: Link}
 
   - key: docs
     type: section

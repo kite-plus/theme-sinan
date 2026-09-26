@@ -130,6 +130,26 @@ theme:
     show_news:
       label: 显示最新动态
       help: 在特性下面列出最新的三篇文章。
+    more_title:
+      label: 末尾标题
+      help: 首页末尾那一列的小标题，例如相关项目。
+      placeholder: 更多
+    more_text:
+      label: 末尾说明
+      help: 末尾标题下的一句话。
+    more:
+      label: 末尾列表
+      help: 首页末尾的几行，每行一个标题和一句话，可以附一条简短的备注（例如状态），填了链接就能点。
+      fields:
+        title:
+          label: 标题
+        text:
+          label: 文字
+        note:
+          label: 备注
+          placeholder: 开发中
+        link:
+          label: 链接
 
     docs:
       label: 文档

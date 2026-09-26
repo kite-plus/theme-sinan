@@ -68,6 +68,12 @@ theme:
       - title: Nothing from third parties
         text: No web fonts and no scripts from elsewhere. Every page works without a script.
         link: /introduction/
+    more_title: More for Kite
+    more_text: Vane is one of the official add-ons for Kite, each in its own repository.
+    more:
+      - {title: Kite, text: "The program itself, with its default theme and the studio.", note: "0.1", link: https://github.com/kite-plus/kite}
+      - {title: Official plugins, text: "Comments, analytics, search, and math with diagrams.", note: 4 plugins, link: https://github.com/kite-plus/plugin-search}
+      - {title: Your theme, text: Write one against the same contract and install it from a zip., note: Guide, link: /settings-reference/}
     social:
       github: https://github.com/kite-plus
     footer_columns:
