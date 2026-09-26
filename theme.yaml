@@ -36,10 +36,19 @@ settings:
         label: Show the site title beside the logo
         help: Turn it off when the logo already spells the name.
         default: true
+      - key: tagline
+        type: string
+        label: Subtitle
+        help: A few words after the site's name in the title of the home page, as browser tabs, search results and shared links show it.
+        placeholder: Docs for my project
       - key: favicon
         type: image
         label: Site icon
         help: Shown in browser tabs and bookmarks. A square picture of at least 64 pixels suits it best.
+      - key: share_image
+        type: image
+        label: Share picture
+        help: Shown when a page is shared in a chat or on a social network, unless the page has a cover of its own. A PNG or JPEG 1200 by 630 pixels suits it best.
       - key: accent
         type: color
         label: Accent color

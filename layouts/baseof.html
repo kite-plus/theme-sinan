@@ -11,28 +11,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if eq $kind "home" }}{{ .Site.Title }}{{ else }}{{ partial "t.html" (dict "k" "title" "lang" $lang "page" .Page) }} · {{ .Site.Title }}{{ end }}</title>
-  {{- $description := .Site.Description }}
-  {{- with .Page.Description }}{{ $description = . }}{{ end }}
-  {{- with $description }}
-  <meta name="description" content="{{ . }}">
-  {{- end }}
-  {{- /* A page's own keywords, a list or a line, stand in for the site's. */ -}}
-  {{- $keywords := .Site.Keywords }}
-  {{- with .Page.Params.keywords }}{{ $keywords = . }}{{ end }}
-  {{- with $keywords }}
-  <meta name="keywords" content="{{ if eq (printf "%T" .) "string" }}{{ . }}{{ else }}{{ range $i, $k := . }}{{ if $i }},{{ end }}{{ $k }}{{ end }}{{ end }}">
-  {{- end }}
-  {{- with .Site.Author }}
-  <meta name="author" content="{{ . }}">
-  {{- end }}
-  {{- if .Site.NoIndex }}
-  <meta name="robots" content="noindex, nofollow">
-  {{- end }}
-  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ url.Rel "rss.xml" }}">
-  {{- with $s.favicon }}
-  <link rel="icon" href="{{ url.Rel . }}">
-  {{- end }}
+  {{ partial "meta.html" . }}
   {{ partial "theme-init.html" . }}
   <link rel="stylesheet" href="{{ url.Rel "vane/vane.css" }}">
   {{- with $s.accent }}

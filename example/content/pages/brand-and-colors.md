@@ -16,6 +16,12 @@ updated_at: 2026-09-27T09:00:00Z
 
 `favicon` is shown in browser tabs and bookmarks. A square picture of at least 64 pixels suits it best.
 
+## Subtitle and share picture
+
+`tagline` follows the site's name in the title of the home page, which browser tabs, search results and shared links show: `Vane · A documentation theme for Kite`. Other pages are titled with their own name and the site's.
+
+`share_image` is the picture a link to the site shows in a chat or on a social network, 1200 by 630 pixels. A post with a `cover` shows its cover instead. Every page also names its canonical address and describes itself to those apps with Open Graph tags.
+
 ## Accent color
 
 Vane is drawn in black, white and grays, and `accent` is its one color: the underline of links, the ring around whatever the keyboard is on, and the matches of a search. Buttons and the page being read stay black and white, so any color suits. On a dark page the theme lightens the accent by itself so that it stays readable.

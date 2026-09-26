@@ -1,0 +1,63 @@
+{{- /* What a page says about itself to browsers, search engines and the
+       apps a link is shared in. Called with the page's context. */ -}}
+{{- $s := .Site.ThemeSettings -}}
+{{- $lang := .Site.Language -}}
+{{- $kind := printf "%s" .Page.Kind -}}
+{{- $name := partial "t.html" (dict "k" "title" "lang" $lang "page" .Page) -}}
+{{- $title := printf "%s · %s" $name .Site.Title -}}
+{{- if eq $kind "home" }}
+  {{- $title = .Site.Title }}
+  {{- with $s.tagline }}{{ $title = printf "%s · %s" $.Site.Title . }}{{ end }}
+{{- end -}}
+<title>{{ $title }}</title>
+  {{- $description := .Site.Description }}
+  {{- with .Page.Description }}{{ $description = . }}{{ end }}
+  {{- with $description }}
+  <meta name="description" content="{{ . }}">
+  {{- end }}
+  {{- /* A page's own keywords, a list or a line, stand in for the site's. */ -}}
+  {{- $keywords := .Site.Keywords }}
+  {{- with .Page.Params.keywords }}{{ $keywords = . }}{{ end }}
+  {{- with $keywords }}
+  <meta name="keywords" content="{{ if eq (printf "%T" .) "string" }}{{ . }}{{ else }}{{ range $i, $k := . }}{{ if $i }},{{ end }}{{ $k }}{{ end }}{{ end }}">
+  {{- end }}
+  {{- with .Site.Author }}
+  <meta name="author" content="{{ . }}">
+  {{- end }}
+  {{- if .Site.NoIndex }}
+  <meta name="robots" content="noindex, nofollow">
+  {{- end }}
+  {{- /* A page's cover, beside it in its folder or elsewhere, stands in for
+         the site's share picture. */ -}}
+  {{- $image := "" }}
+  {{- with $s.share_image }}{{ $image = url.Abs . }}{{ end }}
+  {{- with .Page.Params.cover }}
+    {{- if or (str.HasPrefix "http://" .) (str.HasPrefix "https://" .) }}{{ $image = . }}
+    {{- else if str.HasPrefix "/" . }}{{ $image = url.Abs . }}
+    {{- else }}{{ $image = printf "%s%s" $.Page.Permalink . }}{{ end }}
+  {{- end }}
+  {{- $article := and (eq $kind "single") (eq .Page.Type "post") }}
+  {{- if ne $kind "404" }}
+  <link rel="canonical" href="{{ .Page.Permalink }}">
+  <meta property="og:url" content="{{ .Page.Permalink }}">
+  {{- end }}
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta property="og:type" content="{{ if $article }}article{{ else }}website{{ end }}">
+  <meta property="og:title" content="{{ if eq $kind "home" }}{{ $title }}{{ else }}{{ $name }}{{ end }}">
+  {{- with $description }}
+  <meta property="og:description" content="{{ . }}">
+  {{- end }}
+  <meta property="og:locale" content="{{ str.Replace "-" "_" $lang }}">
+  {{- with $image }}
+  <meta property="og:image" content="{{ . }}">
+  {{- end }}
+  {{- if $article }}
+  <meta property="article:published_time" content="{{ time.Format "2006-01-02T15:04:05Z07:00" .Page.PublishDate }}">
+  {{- end }}
+  <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ url.Rel "rss.xml" }}">
+  {{- with $s.favicon }}
+  <link rel="icon" href="{{ url.Rel . }}">
+  {{- end }}

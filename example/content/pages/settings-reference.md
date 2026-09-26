@@ -16,7 +16,9 @@ The studio shows these as a form under **Settings → Theme**, in the sections b
 | --- | --- | --- | --- |
 | `logo` | image | | Drawn before the site title in the header |
 | `show_title` | boolean | `true` | Shows the site title beside the logo |
+| `tagline` | string | | Follows the site's name in the home page's title |
 | `favicon` | image | | The icon of browser tabs and bookmarks |
+| `share_image` | image | | The picture a shared link shows, where a page has no cover |
 | `accent` | color | `#3d65bd` | The underline of links, the focus and search matches |
 | `color_scheme` | select | `auto` | `auto`, `light` or `dark` first |
 

@@ -20,6 +20,7 @@ theme:
       - {label: Docs, url: /introduction/}
       - {label: News, url: /posts/}
       - {label: Kite, url: https://github.com/kite-plus/kite}
+    tagline: A documentation theme for Kite
     button_label: Download
     button_url: https://github.com/kite-plus/theme-vane/releases
     sidebar:
