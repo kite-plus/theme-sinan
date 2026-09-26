@@ -19,7 +19,7 @@
     {{- with $s.badge_tag }}<span class="badge-tag">{{ . }}</span>{{ end }}<span>{{ . }}</span>
   {{- if $s.badge_link }}{{ partial "icon.html" "next" }}</a>{{ else }}</p>{{ end }}
   {{- end }}
-  <h1 class="hero-title">{{ with $s.hero_title }}{{ . }}{{ else }}{{ $site.Title }}{{ end }}</h1>
+  <h1 class="hero-title">{{ with $s.hero_title }}{{ range $i, $line := str.Split "\n" . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}{{ else }}{{ $site.Title }}{{ end }}</h1>
   {{- $tagline := $s.hero_text }}
   {{- if not $tagline }}{{ $tagline = $site.Description }}{{ end }}
   {{- with $tagline }}

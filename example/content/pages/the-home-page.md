@@ -14,7 +14,7 @@ updated_at: 2026-09-27T09:00:00Z
 
 ## Headline and tagline
 
-`hero_title` is the headline, and `hero_text` the sentence or two under it. Left empty, they are the site's title and description.
+`hero_title` is the headline, and `hero_text` the sentence or two under it. Left empty, they are the site's title and description. A line break in `hero_title` starts a new line in the headline, where a long one should turn.
 
 ## Buttons and a command
 

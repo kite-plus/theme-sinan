@@ -44,7 +44,7 @@ The studio shows these as a form under **Settings → Theme**, in the sections b
 | `badge_text` | string | | A short line above the headline |
 | `badge_tag` | string | | A word or a version at the start of the badge |
 | `badge_link` | url | | Where the badge leads, if anywhere |
-| `hero_title` | string | the site title | The headline |
+| `hero_title` | text | the site title | The headline; each line starts a new line |
 | `hero_text` | text | the site description | The tagline |
 | `actions` | list of `label`, `url` | | The buttons; the first is the main one |
 | `hero_command` | string | | A command beside the buttons, ready to copy |

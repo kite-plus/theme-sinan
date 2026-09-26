@@ -91,7 +91,7 @@ theme:
       help: 留空时标签条不是链接。
     hero_title:
       label: 标题
-      help: 留空时使用站点标题。
+      help: 留空时使用站点标题。换行的地方，标题里也换行。
     hero_text:
       label: 标语
       help: 标题下的一两句话。留空时使用站点描述。

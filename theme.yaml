@@ -134,9 +134,9 @@ settings:
         help: Left empty, the badge is not a link.
         placeholder: /posts/version-1-0/
       - key: hero_title
-        type: string
+        type: text
         label: Headline
-        help: Left empty, the site title is used.
+        help: Left empty, the site title is used. Each line of it starts a new line in the headline.
       - key: hero_text
         type: text
         label: Tagline

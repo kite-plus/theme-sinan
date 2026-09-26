@@ -559,6 +559,8 @@ a.badge:hover { border-color: var(--line-strong); }
   margin: 0; max-width: 15em;
   font-size: clamp(2.5rem, 5.2vw, 4rem); font-weight: 600; line-height: 1.12; letter-spacing: -.02em;
   text-wrap: balance;
+  /* Chinese and Japanese break at punctuation rather than inside a word. */
+  word-break: keep-all; overflow-wrap: break-word;
 }
 .hero-tagline {
   max-width: 37.5rem; margin: 20px 0 0;
