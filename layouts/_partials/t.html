@@ -16,7 +16,10 @@
 {{- else if eq .k "search_placeholder" }}{{ if $zh }}按标题查找文档{{ else }}Find a page by its title{{ end }}
 {{- else if eq .k "search_empty" }}{{ if $zh }}没有标题相符的页面{{ else }}No page has a title like that{{ end }}
 {{- else if eq .k "close" }}{{ if $zh }}关闭{{ else }}Close{{ end }}
-{{- else if eq .k "toggle" }}{{ if $zh }}切换深浅色{{ else }}Switch between light and dark{{ end }}
+{{- else if eq .k "theme_auto" }}{{ if $zh }}自动模式{{ else }}Automatic mode{{ end }}
+{{- else if eq .k "theme_dark" }}{{ if $zh }}深色模式{{ else }}Dark mode{{ end }}
+{{- else if eq .k "theme_light" }}{{ if $zh }}浅色模式{{ else }}Light mode{{ end }}
+{{- else if eq .k "theme_switch_to" }}{{ if $zh }}点击切换至{{ else }}Switch to {{ end }}
 {{- else if eq .k "on_this_page" }}{{ if $zh }}本页目录{{ else }}On this page{{ end }}
 {{- else if eq .k "prev" }}{{ if $zh }}上一页{{ else }}Previous{{ end }}
 {{- else if eq .k "next" }}{{ if $zh }}下一页{{ else }}Next{{ end }}

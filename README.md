@@ -35,6 +35,11 @@ links, the keyboard focus and the matches of a search.
   official [Search](https://github.com/kite-plus/plugin-search) plugin on the
   site, the box in the header opens its search of the whole text instead.
 - **News** from Kite's posts, with tags, categories and an RSS feed.
+- **Light and dark**: the button in the header steps through automatic (the
+  reader's system), dark and light, and the browser remembers the choice.
+  The new scheme spreads from the button as a circle where the browser has
+  view transitions, and switches at once where it has not or where the
+  reader asks for less motion.
 
 Every page works without a script, and nothing is loaded from a third party.
 

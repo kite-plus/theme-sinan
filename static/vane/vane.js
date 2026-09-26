@@ -1,29 +1,15 @@
 /* Vane, a documentation theme for Kite.
  *
  * Every page works without this script. It adds what only a script can:
- * switching light and dark, finding a page by its title, copying code, links
- * to headings, and marking the section being read. */
+ * finding a page by its title, copying code, links to headings, and marking
+ * the section being read. Light and dark live in theme-init.html, which has
+ * to run before the first paint. */
 (function () {
   "use strict";
 
   var root = document.documentElement;
   var strings = document.body.dataset;
   var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
-
-  // Light and dark. The choice is kept under the key the default theme uses.
-  var toggle = document.querySelector("[data-theme-toggle]");
-  if (toggle) {
-    toggle.hidden = false;
-    toggle.addEventListener("click", function () {
-      var current = root.getAttribute("data-theme");
-      if (!current) {
-        current = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-      }
-      var next = current === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      try { localStorage.setItem("kite-theme", next); } catch (e) {}
-    });
-  }
 
   // The drawer of a narrow screen opens without a script; this closes it.
   var drawer = document.getElementById("nav-toggle");

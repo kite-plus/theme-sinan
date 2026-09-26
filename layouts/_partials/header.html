@@ -19,8 +19,14 @@
       {{- $search := partial "t.html" (dict "k" "search_label" "lang" $lang) }}
       <button type="button" class="search-button" data-search aria-label="{{ $search }}" hidden>{{ partial "icon.html" "search" }}<span class="search-text">{{ $search }}</span><kbd>/</kbd></button>
       {{- partial "social.html" . }}
-      {{- $toggle := partial "t.html" (dict "k" "toggle" "lang" $lang) }}
-      <button type="button" class="icon-button theme-toggle" data-theme-toggle title="{{ $toggle }}" aria-label="{{ $toggle }}" hidden><span class="moon">{{ partial "icon.html" "moon" }}</span><span class="sun">{{ partial "icon.html" "sun" }}</span></button>
+      {{- /* theme-init.html runs the toggle and relabels it for the reader's
+             own choice; this label is for the site's. */}}
+      {{- $modes := dict "auto" (partial "t.html" (dict "k" "theme_auto" "lang" $lang)) "dark" (partial "t.html" (dict "k" "theme_dark" "lang" $lang)) "light" (partial "t.html" (dict "k" "theme_light" "lang" $lang)) }}
+      {{- $switchTo := partial "t.html" (dict "k" "theme_switch_to" "lang" $lang) }}
+      {{- $mode := "auto" }}{{ with $s.color_scheme }}{{ if or (eq . "light") (eq . "dark") }}{{ $mode = . }}{{ end }}{{ end }}
+      {{- $next := index (dict "auto" "dark" "dark" "light" "light" "auto") $mode }}
+      {{- $toggle := printf "%s · %s%s" (index $modes $mode) $switchTo (index $modes $next) }}
+      <button type="button" class="icon-button theme-toggle" data-theme-toggle data-auto="{{ $modes.auto }}" data-dark="{{ $modes.dark }}" data-light="{{ $modes.light }}" data-switch-to="{{ $switchTo }}" title="{{ $toggle }}" aria-label="{{ $toggle }}"><span data-theme-icon="auto">{{ partial "icon.html" "monitor" }}</span><span data-theme-icon="dark">{{ partial "icon.html" "moon" }}</span><span data-theme-icon="light">{{ partial "icon.html" "sun" }}</span></button>
       {{- if and $s.button_label $s.button_url }}
       {{ partial "link.html" (dict "label" $s.button_label "url" $s.button_url "lang" $lang "class" "button primary header-button") }}
       {{- end }}

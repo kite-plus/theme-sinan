@@ -25,7 +25,6 @@
   --hl-name: #8250df; --hl-comment: #59636e; --hl-tag: #116329;
   --hl-added: #e6f4ea; --hl-removed: #fdebec; --hl-line: #f0f0f2;
 
-  --moon: inline-flex; --sun: none;
   --show-light: block; --show-dark: none;
 
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial,
@@ -65,7 +64,6 @@
     --hl-keyword: #ff7b72; --hl-string: #a5d6ff; --hl-number: #79c0ff;
     --hl-name: #d2a8ff; --hl-comment: #8b949e; --hl-tag: #7ee787;
     --hl-added: #12301c; --hl-removed: #3b1519; --hl-line: #1b1b1e;
-    --moon: none; --sun: inline-flex;
     --show-light: none; --show-dark: block;
     color-scheme: dark;
   }
@@ -81,7 +79,6 @@
   --hl-keyword: #ff7b72; --hl-string: #a5d6ff; --hl-number: #79c0ff;
   --hl-name: #d2a8ff; --hl-comment: #8b949e; --hl-tag: #7ee787;
   --hl-added: #12301c; --hl-removed: #3b1519; --hl-line: #1b1b1e;
-  --moon: none; --sun: inline-flex;
   --show-light: none; --show-dark: block;
   color-scheme: dark;
 }
@@ -225,8 +222,30 @@ button { font: inherit; color: inherit; }
 }
 .icon-button:hover { background: var(--bg-mute); color: var(--ink); }
 .social { display: flex; align-items: center; }
-.theme-toggle .moon { display: var(--moon); }
-.theme-toggle .sun { display: var(--sun); }
+/* The toggle needs theme-init.html, and shows the reader's mode: automatic,
+   dark or light. */
+.theme-toggle { display: none; transition: color .15s, background-color .15s, transform .15s; }
+:root[data-js] .theme-toggle { display: inline-flex; }
+.theme-toggle:active { transform: scale(.9); }
+.theme-toggle [data-theme-icon] { display: none; }
+:root:not([data-theme]) .theme-toggle [data-theme-icon="auto"],
+:root[data-theme="dark"] .theme-toggle [data-theme-icon="dark"],
+:root[data-theme="light"] .theme-toggle [data-theme-icon="light"] { display: flex; }
+@keyframes theme-icon-in {
+  from { opacity: 0; transform: rotate(-90deg) scale(.4); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  :root[data-theme-switched] .theme-toggle [data-theme-icon] {
+    animation: theme-icon-in .4s cubic-bezier(.34, 1.56, .64, 1);
+  }
+}
+/* While the scheme changes nothing fades on its own, and the new one spreads
+   from the toggle as a circle instead of the default cross-fade. */
+:root[data-theme-changing] *,
+:root[data-theme-changing] *::before,
+:root[data-theme-changing] *::after { transition: none !important; }
+:root[data-theme-changing]::view-transition-old(root),
+:root[data-theme-changing]::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
 .header-button { height: 34px; margin-left: 8px; padding: 0 14px; font-size: 13.5px; }
 .menu-button { display: none; }
 .nav-toggle { display: none; }
