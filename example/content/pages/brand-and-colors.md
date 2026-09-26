@@ -6,7 +6,7 @@ status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
 description: "A logo, a site icon, an accent color, and light or dark."
-updated_at: 2026-09-25T09:00:00Z
+updated_at: 2026-09-27T09:00:00Z
 ---
 ## Logo and title
 
@@ -18,7 +18,7 @@ updated_at: 2026-09-25T09:00:00Z
 
 ## Accent color
 
-`accent` colors the links, the current page in the docs tree and in the table of contents, and the buttons. The suggested colors all carry white text; on a dark page the theme lightens the accent by itself so that links stay readable.
+Vane is drawn in black, white and grays, and `accent` is its one color: the underline of links, the ring around whatever the keyboard is on, and the matches of a search. Buttons and the page being read stay black and white, so any color suits. On a dark page the theme lightens the accent by itself so that it stays readable.
 
 | Color | Value |
 | --- | --- |

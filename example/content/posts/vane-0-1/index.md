@@ -12,12 +12,12 @@ The first version of Vane draws everything Kite can give a docs site today.
 
 ## What is in it
 
-- A home page with a headline, buttons, feature cards and the latest news.
+- A home page with a badge, a headline, buttons and a command to copy, a screenshot, a numbered grid of features and the latest news.
 - Docs in a tree of groups and pages, set in the studio, with previous and next links in reading order.
 - A table of contents that marks the section being read.
-- Light and dark, a drawer on a narrow screen, and copy buttons on code.
-- A search by title across the docs tree.
+- Light and dark, a drawer on a narrow screen, and code blocks named by their language, with a button that copies them.
+- A search by title across the docs tree, or of the whole text with Kite's search plugin.
 
 ## What comes next
 
-Kite does not yet write a search index, keep an order among its pages, or know where a page's file lives. As it learns each, Vane will search the text of the pages, draw the tree from the pages themselves, and link to where a page can be edited.
+Kite does not yet keep an order among its pages or know where a page's file lives. As it learns each, Vane will draw the tree from the pages themselves and link to where a page can be edited.

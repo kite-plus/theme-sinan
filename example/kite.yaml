@@ -20,6 +20,8 @@ theme:
       - {label: Docs, url: /introduction/}
       - {label: News, url: /posts/}
       - {label: Kite, url: https://github.com/kite-plus/kite}
+    button_label: Download
+    button_url: https://github.com/kite-plus/theme-vane/releases
     sidebar:
       - title: Getting started
         pages:
@@ -38,14 +40,21 @@ theme:
       - title: Reference
         pages:
           - {label: Settings reference, url: /settings-reference/}
-    announcement: true
+    announcement: false
     announcement_text: Vane is in early development, and its settings may still change.
     announcement_link: /posts/vane-0-1/
+    badge_tag: "0.1"
+    badge_text: The first release is out
+    badge_link: /posts/vane-0-1/
     hero_title: Docs that show the way
     hero_text: Vane is a documentation theme for Kite. A home page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
     actions:
       - {label: Get started, url: /introduction/}
       - {label: Quick start, url: /quick-start/}
+    hero_command: unzip vane-0.1.0.zip -d themes
+    hero_image: /images/docs-light.webp
+    hero_image_dark: /images/docs-dark.webp
+    features_title: What it draws
     features:
       - title: Docs in reading order
         text: Groups and pages in the order you choose, with previous and next links that follow it.

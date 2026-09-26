@@ -6,7 +6,7 @@ status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
 description: "The links in the header, and the groups and pages of the docs in reading order."
-updated_at: 2026-09-25T09:00:00Z
+updated_at: 2026-09-27T09:00:00Z
 ---
 ## Header links
 
@@ -44,4 +44,4 @@ The header links and the tree move into a drawer that the menu button opens, on 
 
 ## Search
 
-The search in the header finds a page of the tree, or a header link, by its title. Press `/`, or `Ctrl K`, to open it from anywhere.
+The search in the header finds a page of the tree, or a header link, by its title. Press `/`, or `Ctrl K`, to open it from anywhere. With Kite's official [search plugin](https://github.com/kite-plus/plugin-search) on the site, the same box opens the plugin's search of the whole text, and the plugin leaves out its own button.

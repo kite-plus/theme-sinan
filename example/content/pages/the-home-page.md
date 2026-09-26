@@ -5,20 +5,20 @@ slug: the-home-page
 status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
-description: "A headline, buttons, cards for the features, and the latest news."
-updated_at: 2026-09-25T09:00:00Z
+description: "A badge, a headline, buttons and a command, a screenshot, the features and the latest news."
+updated_at: 2026-09-27T09:00:00Z
 ---
+## Badge
+
+`badge_text` is a short line above the headline, such as news of a release, and `badge_tag` a word or a version drawn in black at its start. With `badge_link` set, the badge leads there.
+
 ## Headline and tagline
 
 `hero_title` is the headline, and `hero_text` the sentence or two under it. Left empty, they are the site's title and description.
 
-## Picture
+## Buttons and a command
 
-`hero_image` is drawn beside the headline on a wide screen and under it on a narrow one, such as a screenshot of the product or a large logo.
-
-## Buttons
-
-`actions` are the buttons under the tagline. The first is the main one.
+`actions` are the buttons under the tagline. The first is the main one, drawn in black.
 
 ```yaml
 actions:
@@ -28,9 +28,15 @@ actions:
 
 With no buttons, the home page links to the first page of the docs tree.
 
+`hero_command` is drawn beside the buttons with a button that copies it, such as the command that installs the product.
+
+## Picture
+
+`hero_image` is drawn in a frame under the buttons, across the page, so a wide screenshot of the product suits it best. `hero_image_dark` takes its place when the page is dark; left empty, the one picture is shown either way.
+
 ## Features
 
-`features` are cards under the headline, each a title and a sentence. A card with a link leads to it.
+`features` are drawn as a grid under the picture, numbered in order, each a title and a sentence. A feature with a link leads to it. `features_title` puts a small heading over them.
 
 ## News
 
