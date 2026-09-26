@@ -20,11 +20,11 @@
   <link rel="icon" href="{{ url.Rel . }}">
   {{- end }}
   {{ partial "theme-init.html" . }}
-  <link rel="stylesheet" href="{{ url.Rel "sinan/sinan.css" }}">
+  <link rel="stylesheet" href="{{ url.Rel "vane/vane.css" }}">
   {{- with $s.accent }}
   <style>:root { --accent-base: {{ . }}; }</style>
   {{- end }}
-  <script src="{{ url.Rel "sinan/sinan.js" }}" defer></script>
+  <script src="{{ url.Rel "vane/vane.js" }}" defer></script>
   {{- with $s.head_html }}
   {{ safeHTML . }}
   {{- end }}

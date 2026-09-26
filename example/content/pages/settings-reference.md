@@ -5,7 +5,7 @@ slug: settings-reference
 status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
-description: "Every setting Sinan declares, as kite.yaml stores it under theme.settings."
+description: "Every setting Vane declares, as kite.yaml stores it under theme.settings."
 updated_at: 2026-09-25T09:00:00Z
 ---
 The studio shows these as a form under **Settings → Theme**, in the sections below. A setting put back to its default is removed from `kite.yaml`.

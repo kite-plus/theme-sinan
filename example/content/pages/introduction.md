@@ -5,10 +5,10 @@ slug: introduction
 status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
-description: "Sinan is a documentation theme for Kite, for product docs, project sites and knowledge bases."
+description: "Vane is a documentation theme for Kite, for product docs, project sites and knowledge bases."
 updated_at: 2026-09-25T09:00:00Z
 ---
-Sinan draws a site as a home page, docs in a tree of groups and pages, and news. It is named after the *sinan*, the south-pointing spoon of ancient China and an early form of the compass: a docs site is there to show the way.
+Vane draws a site as a home page, docs in a tree of groups and pages, and news. It is named after the weather vane, which turns to show which way the wind blows: a docs site is there to show the way.
 
 ## What it draws
 
@@ -23,8 +23,8 @@ Nothing from a third party: no web fonts, and no scripts or styles from elsewher
 
 ## What it is not
 
-Sinan is not a blog theme; Kite's default theme is one. It does not keep several versions of the docs side by side, and its search looks at titles only until Kite writes a search index.
+Vane is not a blog theme; Kite's default theme is one. It does not keep several versions of the docs side by side, and its search looks at titles only until Kite writes a search index.
 
 ## Where it lives
 
-Sinan has its own repository and its own releases. Kite ships only its default theme, and a site installs Sinan from a release, as [Installing a theme](/installing-a-theme/) describes.
+Vane has its own repository and its own releases. Kite ships only its default theme, and a site installs Vane from a release, as [Installing a theme](/installing-a-theme/) describes.

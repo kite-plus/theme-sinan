@@ -1,4 +1,4 @@
-/* Sinan, a documentation theme for Kite.
+/* Vane, a documentation theme for Kite.
  *
  * Every page works without this script. It adds what only a script can:
  * switching light and dark, finding a page by its title, copying code, links

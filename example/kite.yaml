@@ -1,7 +1,7 @@
-# An example site that uses Sinan, for developing the theme and for its
-# screenshot. themes/sinan links to the root of this repository.
+# An example site that uses Vane, for developing the theme and for its
+# screenshot. themes/vane links to the root of this repository.
 site:
-  title: Sinan
+  title: Vane
   description: A documentation theme for Kite
   baseURL: http://localhost:1818
   language: en
@@ -14,7 +14,7 @@ build:
   output: public
 
 theme:
-  name: sinan
+  name: vane
   settings:
     nav:
       - {label: Docs, url: /introduction/}
@@ -39,11 +39,10 @@ theme:
         pages:
           - {label: Settings reference, url: /settings-reference/}
     announcement: true
-    announcement_text: Sinan is in early development, and its settings may still change.
-    announcement_link: /posts/sinan-0-1/
+    announcement_text: Vane is in early development, and its settings may still change.
+    announcement_link: /posts/vane-0-1/
     hero_title: Docs that show the way
-    hero_text: Sinan is a documentation theme for Kite. A home page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
-    hero_image: /images/sinan.svg
+    hero_text: Vane is a documentation theme for Kite. A home page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
     actions:
       - {label: Get started, url: /introduction/}
       - {label: Quick start, url: /quick-start/}

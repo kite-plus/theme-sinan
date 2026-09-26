@@ -1,7 +1,7 @@
-# What Sinan says about itself in the admin, in Chinese. The keys follow
+# What Vane says about itself in the admin, in Chinese. The keys follow
 # theme.yaml; anything missing here is shown as written there.
 theme:
-  title: 司南
+  title: 风标
   description: 为产品文档、项目官网和知识库设计的文档主题。首页、按顺序排列的文档目录、页内目录和新闻，支持浅色与深色，不从第三方加载任何资源。
 
   settings:

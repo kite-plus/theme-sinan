@@ -15,19 +15,19 @@ kite init my-docs
 cd my-docs
 ```
 
-## Install Sinan
+## Install Vane
 
-Open the studio with `kite run`, go to **Settings → Theme**, and drop the zip of a Sinan release on the upload tile. Try it on the whole site, then choose **Use**.
+Open the studio with `kite run`, go to **Settings → Theme**, and drop the zip of a Vane release on the upload tile. Try it on the whole site, then choose **Use**.
 
 Without the studio, unzip the release into the site's `themes` folder and choose the theme in `kite.yaml`:
 
 ```sh
-unzip sinan-0.1.0.zip -d themes
+unzip vane-0.1.0.zip -d themes
 ```
 
 ```yaml
 theme:
-  name: sinan
+  name: vane
 ```
 
 ## Write the first page
@@ -42,7 +42,7 @@ A page joins the docs once the tree lists it. The studio edits the tree as a for
 
 ```yaml
 theme:
-  name: sinan
+  name: vane
   settings:
     sidebar:
       - title: Getting started

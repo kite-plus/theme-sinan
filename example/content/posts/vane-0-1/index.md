@@ -1,14 +1,14 @@
 ---
 id: 01M3CSA3RFMKYKF439QATGP6QA
-title: Sinan 0.1
-slug: sinan-0-1
+title: Vane 0.1
+slug: vane-0-1
 status: published
 created_at: 2026-09-25T08:00:00Z
 published_at: 2026-09-25T08:00:00Z
 description: "The first version: a home page, a docs tree, a table of contents, news and a search by title."
 tags: [release]
 ---
-The first version of Sinan draws everything Kite can give a docs site today.
+The first version of Vane draws everything Kite can give a docs site today.
 
 ## What is in it
 
@@ -20,4 +20,4 @@ The first version of Sinan draws everything Kite can give a docs site today.
 
 ## What comes next
 
-Kite does not yet write a search index, keep an order among its pages, or know where a page's file lives. As it learns each, Sinan will search the text of the pages, draw the tree from the pages themselves, and link to where a page can be edited.
+Kite does not yet write a search index, keep an order among its pages, or know where a page's file lives. As it learns each, Vane will search the text of the pages, draw the tree from the pages themselves, and link to where a page can be edited.

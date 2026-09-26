@@ -5,7 +5,7 @@ slug: markdown-reference
 status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
-description: "Everything Kite's Markdown writes, as Sinan draws it."
+description: "Everything Kite's Markdown writes, as Vane draws it."
 updated_at: 2026-09-25T09:00:00Z
 ---
 ## Text
@@ -41,13 +41,13 @@ func Greet(name string) string {
 }
 
 func main() {
-	fmt.Println(Greet("Sinan"))
+	fmt.Println(Greet("Vane"))
 }
 ```
 
 ```yaml
 theme:
-  name: sinan
+  name: vane
   settings:
     accent: "#3d65bd"
     show_toc: true

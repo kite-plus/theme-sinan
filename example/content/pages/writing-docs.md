@@ -5,7 +5,7 @@ slug: writing-docs
 status: published
 created_at: 2026-09-25T17:20:19Z
 published_at: 2026-09-25T17:20:19Z
-description: "Docs are Kite pages. What Sinan reads from them."
+description: "Docs are Kite pages. What Vane reads from them."
 updated_at: 2026-09-25T09:00:00Z
 ---
 Every doc is a page, made with `kite new page` or from the studio, and listed in [the docs tree](/navigation-and-the-docs-tree/).

@@ -1,5 +1,5 @@
-name: sinan
-title: Sinan
+name: vane
+title: Vane
 version: 0.1.0
 apiVersion: kite/v1
 requires: ">=0.1.0 <2.0.0"
@@ -8,7 +8,7 @@ author:
   name: Kite
   url: https://github.com/kite-plus
 license: Apache-2.0
-homepage: https://github.com/kite-plus/theme-sinan
+homepage: https://github.com/kite-plus/theme-vane
 tags: [docs, documentation, sans-serif, dark mode]
 screenshot: screenshot.webp
 
