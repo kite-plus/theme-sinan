@@ -3,6 +3,7 @@
 {{- $lang := .Site.Language -}}
 {{- $site := .Site -}}
 {{- $toc := and $s.show_toc (partial "toc-count.html" .Page) -}}
+{{- $reading := and $s.show_reading_time (gt .Page.WordCount 0) -}}
 <div class="doc{{ if $toc }} with-toc{{ end }}">
   <article class="doc-body">
     {{- if eq .Page.Type "post" }}
@@ -10,8 +11,12 @@
     {{- end }}
     <header class="doc-header">
       <h1>{{ .Page.Title }}</h1>
+      {{- with .Page.Description }}
+      <p class="lead">{{ . }}</p>
+      {{- end }}
       <p class="post-meta">
         <time datetime="{{ time.Format "2006-01-02" .Page.PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" .Page.PublishDate) }}</time>
+        {{- if $reading }}<span class="sep" aria-hidden="true">·</span><span>{{ partial "t.html" (dict "k" "minutes" "lang" $lang "n" (time.Minutes .Page.ReadingTime)) }}</span>{{ end }}
         {{- with partial "terms.html" (dict "page" .Page "site" $site) }}
         <span class="terms">{{ . }}</span>
         {{- end }}

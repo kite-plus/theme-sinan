@@ -38,6 +38,9 @@
 {{- else if eq .k "copy" }}{{ if $zh }}复制{{ else }}Copy{{ end }}
 {{- else if eq .k "copied" }}{{ if $zh }}已复制{{ else }}Copied{{ end }}
 {{- else if eq .k "anchor" }}{{ if $zh }}这一节的链接{{ else }}Link to this section{{ end }}
+{{- else if eq .k "terminal" }}{{ if $zh }}终端{{ else }}Terminal{{ end }}
+{{- else if eq .k "top" }}{{ if $zh }}回到顶部{{ else }}Back to top{{ end }}
+{{- else if eq .k "minutes" }}{{ if $zh }}约 {{ .n }} 分钟读完{{ else }}{{ .n }} min read{{ end }}
 {{- else if eq .k "email" }}{{ if $zh }}邮件{{ else }}Email{{ end }}
 {{- else if eq .k "new_tab" }}{{ if $zh }}（在新标签页打开）{{ else }} (opens in a new tab){{ end }}
 {{- else if eq .k "powered_pre" }}{{ if $zh }}由 {{ else }}Powered by {{ end }}

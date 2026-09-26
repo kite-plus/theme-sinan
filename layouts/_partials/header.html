@@ -9,6 +9,7 @@
     <label for="nav-toggle" class="menu-button icon-button" title="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}" aria-hidden="true">{{ partial "icon.html" "menu" }}</label>
     {{- end }}
     {{ partial "brand.html" . }}
+    <span class="brand-section" aria-hidden="true">{{ partial "t.html" (dict "k" "docs" "lang" $lang) }}</span>
     {{- with $s.nav }}
     <nav class="header-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
       {{- partial "nav-links.html" $ }}
@@ -16,10 +17,13 @@
     {{- end }}
     <div class="header-tools">
       {{- $search := partial "t.html" (dict "k" "search_label" "lang" $lang) }}
-      <button type="button" class="search-button" data-search aria-label="{{ $search }}" hidden>{{ partial "icon.html" "search" }}<span class="search-text">{{ partial "t.html" (dict "k" "search" "lang" $lang) }}</span><kbd>/</kbd></button>
+      <button type="button" class="search-button" data-search aria-label="{{ $search }}" hidden>{{ partial "icon.html" "search" }}<span class="search-text">{{ $search }}</span><kbd>/</kbd></button>
       {{- partial "social.html" . }}
       {{- $toggle := partial "t.html" (dict "k" "toggle" "lang" $lang) }}
       <button type="button" class="icon-button theme-toggle" data-theme-toggle title="{{ $toggle }}" aria-label="{{ $toggle }}" hidden><span class="moon">{{ partial "icon.html" "moon" }}</span><span class="sun">{{ partial "icon.html" "sun" }}</span></button>
+      {{- if and $s.button_label $s.button_url }}
+      {{ partial "link.html" (dict "label" $s.button_label "url" $s.button_url "lang" $lang "class" "button primary header-button") }}
+      {{- end }}
     </div>
   </div>
 </header>

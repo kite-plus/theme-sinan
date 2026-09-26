@@ -2,7 +2,7 @@
 # theme.yaml; anything missing here is shown as written there.
 theme:
   title: 风标
-  description: 为产品文档、项目官网和知识库设计的文档主题。首页、按顺序排列的文档目录、页内目录和新闻，支持浅色与深色，不从第三方加载任何资源。
+  description: 为产品文档、项目官网和知识库设计的文档主题，黑白灰加细线。首页、按顺序排列的文档目录、页内目录和新闻，支持浅色与深色，不从第三方加载任何资源。
 
   settings:
     brand:
@@ -18,7 +18,7 @@ theme:
       help: 显示在浏览器标签页和书签里。建议使用至少 64 像素的正方形图片。
     accent:
       label: 强调色
-      help: 用于链接、文档目录里的当前页和按钮。请选择足够深、能在上面放白字的颜色；深色模式下主题会自动调亮。
+      help: 用于链接的下划线、键盘焦点和搜索结果里的高亮。按钮和当前页保持黑白。深色模式下主题会自动调亮。
       options:
         "#3d65bd": 风筝蓝
         "#0f766e": 青绿
@@ -43,6 +43,12 @@ theme:
           placeholder: 指南
         url:
           label: 地址
+    button_label:
+      label: 页头按钮
+      help: 页头最右边的黑色按钮，例如下载链接。留空就不显示。
+      placeholder: 下载
+    button_url:
+      label: 页头按钮地址
     sidebar:
       label: 文档目录
       help: 侧栏里的分组和每组的页面，按阅读顺序排列。列在这里的页面旁边会显示目录，它的上一页、下一页也按这个顺序。
@@ -73,27 +79,47 @@ theme:
 
     home:
       label: 首页
+    badge_text:
+      label: 标签条
+      help: 标题上方的一行短句，例如新版本发布的消息。留空就不显示。
+      placeholder: 第一个版本发布了
+    badge_tag:
+      label: 标签
+      help: 标签条开头的黑底小字，例如版本号。
+    badge_link:
+      label: 标签条链接
+      help: 留空时标签条不是链接。
     hero_title:
       label: 标题
       help: 留空时使用站点标题。
     hero_text:
       label: 标语
       help: 标题下的一两句话。留空时使用站点描述。
-    hero_image:
-      label: 配图
-      help: 宽屏时显示在标题旁，例如产品截图或大号标志。
     actions:
       label: 按钮
-      help: 第一个是主按钮。留空时首页链接到文档目录的第一页。
+      help: 第一个是黑色的主按钮。留空时首页链接到文档目录的第一页。
       fields:
         label:
           label: 文字
           placeholder: 开始阅读
         url:
           label: 地址
+    hero_command:
+      label: 命令
+      help: 显示在按钮旁、读者可以一键复制的命令，例如安装产品的命令。
+    hero_image:
+      label: 配图
+      help: 产品的宽幅截图，加边框显示在标题下方。
+    hero_image_dark:
+      label: 深色时的配图
+      help: 页面是深色时换成这张。留空时深浅色都用上面那张。
+    features_title:
+      label: 特性标题
+      help: 特性上方的小标题。
+      placeholder: 能做什么
     features:
       label: 特性
-      help: 标题下的卡片，每张一个标题和一句话，填了链接就能点。
+      help: 标题下方的格子，按顺序编号，每格一个标题和一句话，填了链接就能点。
       fields:
         title:
           label: 标题
@@ -112,7 +138,10 @@ theme:
       help: 有两个以上小标题的页面会在旁边显示目录，窄屏时显示在正文上方。
     show_updated:
       label: 显示最后更新时间
-      help: 取页面的 updated_at，没有时取它的日期。
+      help: 显示在标题下方，取页面的 updated_at，没有时取它的日期。
+    show_reading_time:
+      label: 显示阅读时间
+      help: 在标题下方显示读完这一页大约要多久。
 
     community:
       label: 社交
@@ -142,12 +171,6 @@ theme:
     copyright:
       label: 版权信息
       help: 留空时，署名为站点本身，年份为最后一次构建的年份。
-
-    advanced:
-      label: 高级
-    head_html:
-      label: 页面 head 中的额外 HTML
-      help: 原样加到每个页面，例如统计代码。它不会被检查，请只粘贴你信任的内容。
 
   layouts:
     wide:

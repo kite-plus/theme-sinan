@@ -8,6 +8,7 @@
 
   var root = document.documentElement;
   var strings = document.body.dataset;
+  var mac = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
 
   // Light and dark. The choice is kept under the key the default theme uses.
   var toggle = document.querySelector("[data-theme-toggle]");
@@ -56,37 +57,94 @@
     heading.insertBefore(link, heading.firstChild);
   });
 
-  // Copying code.
-  if (navigator.clipboard) {
-    document.querySelectorAll(".prose pre").forEach(function (pre) {
-      var box = document.createElement("div");
-      box.className = "code-block";
-      pre.parentNode.insertBefore(box, pre);
-      box.appendChild(pre);
-
-      var button = document.createElement("button");
-      button.type = "button";
-      button.className = "copy";
-      button.textContent = strings.copy || "Copy";
-      var timer = 0;
-      button.addEventListener("click", function () {
-        var code = pre.querySelector("code") || pre;
-        navigator.clipboard.writeText(code.textContent.replace(/\n$/, "")).then(function () {
-          button.textContent = strings.copied || "Copied";
-          button.classList.add("done");
-          clearTimeout(timer);
-          timer = setTimeout(function () {
-            button.textContent = strings.copy || "Copy";
-            button.classList.remove("done");
-          }, 1600);
-        });
+  // Copying code: a button that copies the text it is given, and says so.
+  var ICON = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">';
+  var COPY = ICON + '<rect class="copy-icon" x="9" y="9" width="11" height="11" rx="2"/><path class="copy-icon" d="M5 15V6a2 2 0 0 1 2-2h9"/><path class="check" d="m5 12.5 4.5 4.5L19 7.5"/></svg>';
+  var copyButton = function (text) {
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "code-copy";
+    button.title = strings.copy || "Copy";
+    button.setAttribute("aria-label", strings.copy || "Copy");
+    button.innerHTML = COPY;
+    var timer = 0;
+    button.addEventListener("click", function () {
+      navigator.clipboard.writeText(text()).then(function () {
+        button.classList.add("done");
+        button.title = strings.copied || "Copied";
+        button.setAttribute("aria-label", strings.copied || "Copied");
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+          button.classList.remove("done");
+          button.title = strings.copy || "Copy";
+          button.setAttribute("aria-label", strings.copy || "Copy");
+        }, 1600);
       });
-      box.appendChild(button);
+    });
+    return button;
+  };
+
+  // What a code block's bar calls its language. Shells share one name.
+  var SHELLS = /^(bash|sh|shell|zsh|fish|console|shell-session|shellsession|powershell|ps1|pwsh|cmd|bat|batch)$/;
+  var NAMES = {
+    yaml: "YAML", yml: "YAML", json: "JSON", jsonc: "JSON", toml: "TOML", ini: "INI", xml: "XML",
+    html: "HTML", css: "CSS", scss: "SCSS", js: "JavaScript", javascript: "JavaScript", mjs: "JavaScript",
+    ts: "TypeScript", typescript: "TypeScript", jsx: "JSX", tsx: "TSX", vue: "Vue", svelte: "Svelte",
+    go: "Go", "go-html-template": "Go template", "go-text-template": "Go template", gotmpl: "Go template",
+    rust: "Rust", rs: "Rust", python: "Python", py: "Python", ruby: "Ruby", rb: "Ruby", php: "PHP",
+    java: "Java", kotlin: "Kotlin", swift: "Swift", c: "C", cpp: "C++", "c++": "C++", cs: "C#", csharp: "C#",
+    sql: "SQL", graphql: "GraphQL", diff: "Diff", dockerfile: "Dockerfile", docker: "Dockerfile",
+    makefile: "Makefile", make: "Makefile", nginx: "Nginx", md: "Markdown", markdown: "Markdown", lua: "Lua"
+  };
+  var languageOf = function (pre) {
+    var lang = pre.getAttribute("data-lang");
+    if (!lang) {
+      var code = pre.querySelector("code");
+      var match = code && /(?:^|\s)language-(\S+)/.exec(code.className);
+      lang = match ? match[1] : "";
+    }
+    lang = lang.toLowerCase();
+    if (!lang || /^(text|txt|plain|plaintext|none)$/.test(lang)) return "";
+    if (SHELLS.test(lang)) return strings.terminal || "Terminal";
+    return NAMES[lang] || lang;
+  };
+
+  var canCopy = !!(navigator.clipboard && window.isSecureContext !== false);
+  document.querySelectorAll(".prose pre").forEach(function (pre) {
+    var label = languageOf(pre);
+    if (!label && !canCopy) return;
+    var box = document.createElement("div");
+    box.className = "code-block";
+    pre.parentNode.insertBefore(box, pre);
+    var bar = null;
+    if (label) {
+      box.classList.add("has-bar");
+      bar = document.createElement("div");
+      bar.className = "code-bar";
+      var name = document.createElement("span");
+      name.textContent = label;
+      bar.appendChild(name);
+      box.appendChild(bar);
+    }
+    box.appendChild(pre);
+    if (canCopy) {
+      var button = copyButton(function () {
+        var code = pre.querySelector("code") || pre;
+        return code.textContent.replace(/\n$/, "");
+      });
+      (bar || box).appendChild(button);
+    }
+  });
+
+  // The command on the home page, ready to copy.
+  if (canCopy) {
+    document.querySelectorAll(".command code").forEach(function (code) {
+      code.parentNode.appendChild(copyButton(function () { return code.textContent.trim(); }));
     });
   }
 
   // The section being read, marked in the table of contents.
-  var tocLinks = document.querySelectorAll(".toc a[href^='#']");
+  var tocLinks = document.querySelectorAll(".toc li a[href^='#']");
   if (tocLinks.length) {
     var linkFor = {};
     var headings = [];
@@ -126,10 +184,24 @@
     mark();
   }
 
-  // Finding a page by its title, among the pages of the docs tree and the
-  // header links. Kite does not write a search index yet, so the text of the
-  // pages is not searched.
   var openers = document.querySelectorAll("[data-search]");
+  openers.forEach(function (button) {
+    var kbd = button.querySelector("kbd");
+    if (kbd) kbd.textContent = mac ? "⌘K" : "Ctrl K";
+  });
+
+  // With the official search plugin on the site, the search box opens its
+  // search of the whole text, and the plugin keeps the shortcuts.
+  if (window.KiteSearch) {
+    openers.forEach(function (button) {
+      button.setAttribute("data-kite-search", "");
+      button.hidden = false;
+    });
+    return;
+  }
+
+  // Otherwise, finding a page by its title, among the pages of the docs tree
+  // and the header links.
   var entries = [];
   var seen = {};
   var add = function (link, group) {

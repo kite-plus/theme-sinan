@@ -11,7 +11,8 @@
 </details>
 {{- else }}
 <nav class="toc" aria-label="{{ $label }}">
-  <p class="toc-title">{{ $label }}</p>
+  <p class="toc-title">{{ partial "icon.html" "list" }}{{ $label }}</p>
   {{ $list }}
+  <a class="toc-top" href="#">{{ partial "icon.html" "up" }}{{ partial "t.html" (dict "k" "top" "lang" .lang) }}</a>
 </nav>
 {{- end }}

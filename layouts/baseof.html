@@ -4,6 +4,8 @@
 {{- /* A page listed in the docs tree is drawn with the tree beside it,
        unless it asked for the wide layout, which is drawn without. */ -}}
 {{- $inTree := and (eq $kind "single") (ne (printf "%v" .Page.Params.layout) "wide") (partial "tree-has.html" (dict "site" .Site "url" .Page.RelPermalink)) -}}
+{{- $class := "" -}}
+{{- if $inTree }}{{ $class = "has-tree" }}{{ else if eq $kind "home" }}{{ $class = "is-home" }}{{ end -}}
 <!DOCTYPE html>
 <html lang="{{ $lang }}"{{ with $s.color_scheme }}{{ if or (eq . "light") (eq . "dark") }} data-theme="{{ . }}"{{ end }}{{ end }}>
 <head>
@@ -15,6 +17,18 @@
   {{- with $description }}
   <meta name="description" content="{{ . }}">
   {{- end }}
+  {{- /* A page's own keywords, a list or a line, stand in for the site's. */ -}}
+  {{- $keywords := .Site.Keywords }}
+  {{- with .Page.Params.keywords }}{{ $keywords = . }}{{ end }}
+  {{- with $keywords }}
+  <meta name="keywords" content="{{ if eq (printf "%T" .) "string" }}{{ . }}{{ else }}{{ range $i, $k := . }}{{ if $i }},{{ end }}{{ $k }}{{ end }}{{ end }}">
+  {{- end }}
+  {{- with .Site.Author }}
+  <meta name="author" content="{{ . }}">
+  {{- end }}
+  {{- if .Site.NoIndex }}
+  <meta name="robots" content="noindex, nofollow">
+  {{- end }}
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ url.Rel "rss.xml" }}">
   {{- with $s.favicon }}
   <link rel="icon" href="{{ url.Rel . }}">
@@ -25,15 +39,14 @@
   <style>:root { --accent-base: {{ . }}; }</style>
   {{- end }}
   <script src="{{ url.Rel "vane/vane.js" }}" defer></script>
-  {{- with $s.head_html }}
-  {{ safeHTML . }}
-  {{- end }}
   {{ block "head" . }}{{ end }}
+  {{ .Site.HeadHTML }}
 </head>
-<body{{ if $inTree }} class="has-tree"{{ end }}
+<body{{ with $class }} class="{{ . }}"{{ end }}
   data-copy="{{ partial "t.html" (dict "k" "copy" "lang" $lang) }}"
   data-copied="{{ partial "t.html" (dict "k" "copied" "lang" $lang) }}"
   data-anchor="{{ partial "t.html" (dict "k" "anchor" "lang" $lang) }}"
+  data-terminal="{{ partial "t.html" (dict "k" "terminal" "lang" $lang) }}"
   data-search-label="{{ partial "t.html" (dict "k" "search_label" "lang" $lang) }}"
   data-search-placeholder="{{ partial "t.html" (dict "k" "search_placeholder" "lang" $lang) }}"
   data-search-empty="{{ partial "t.html" (dict "k" "search_empty" "lang" $lang) }}">
@@ -49,5 +62,6 @@
     <main id="main" class="main">{{ block "main" . }}{{ end }}</main>
   </div>
   {{ partial "footer.html" . }}
+  {{ .Site.FooterHTML }}
 </body>
 </html>

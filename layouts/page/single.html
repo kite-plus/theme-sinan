@@ -4,6 +4,7 @@
 {{- $inTree := partial "tree-has.html" (dict "site" .Site "url" .Page.RelPermalink) -}}
 {{- $toc := and $s.show_toc (partial "toc-count.html" .Page) -}}
 {{- $updated := and $s.show_updated (not (time.IsZero .Page.Lastmod)) -}}
+{{- $reading := and $s.show_reading_time (gt .Page.WordCount 0) -}}
 <div class="doc{{ if $toc }} with-toc{{ end }}">
   <article class="doc-body">
     {{- if $inTree }}{{ partial "crumb.html" . }}{{ end }}
@@ -12,16 +13,18 @@
       {{- with .Page.Params.description }}
       <p class="lead">{{ . }}</p>
       {{- end }}
+      {{- if or $updated $reading }}
+      <p class="doc-meta">
+        {{- if $updated }}<span>{{ partial "t.html" (dict "k" "updated" "lang" $lang "t" .Page.Lastmod) }}</span>{{ end }}
+        {{- if and $updated $reading }}<span class="sep" aria-hidden="true">·</span>{{ end }}
+        {{- if $reading }}<span>{{ partial "t.html" (dict "k" "minutes" "lang" $lang "n" (time.Minutes .Page.ReadingTime)) }}</span>{{ end }}
+      </p>
+      {{- end }}
     </header>
     {{- if $toc }}{{ partial "toc.html" (dict "page" .Page "lang" $lang "inline" true) }}{{ end }}
     <div class="prose">{{ .Page.Content }}</div>
-    {{- if or $updated $inTree }}
-    <footer class="doc-footer">
-      {{- if $updated }}
-      <p class="updated">{{ partial "t.html" (dict "k" "updated" "lang" $lang "t" .Page.Lastmod) }}</p>
-      {{- end }}
-      {{- if $inTree }}{{ partial "pager.html" . }}{{ end }}
-    </footer>
+    {{- if $inTree }}
+    <footer class="doc-footer">{{ partial "pager.html" . }}</footer>
     {{- end }}
   </article>
   {{- if $toc }}
