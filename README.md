@@ -22,7 +22,7 @@ to `sinan` in `kite.yaml`. Then list the docs in the docs tree, the way
 [the example site's kite.yaml](example/kite.yaml) does. Every setting is
 described in [the settings reference](example/content/pages/settings-reference.md).
 
-Sinan asks for Kite 1.0 or later.
+Sinan asks for Kite 0.1 or later.
 
 ## Developing it
 

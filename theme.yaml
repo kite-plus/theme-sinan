@@ -2,7 +2,7 @@ name: sinan
 title: Sinan
 version: 0.1.0
 apiVersion: kite/v1
-requires: ">=1.0.0 <2.0.0"
+requires: ">=0.1.0 <2.0.0"
 description: A documentation theme for product docs, project sites and knowledge bases. A landing page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
 author:
   name: Kite
