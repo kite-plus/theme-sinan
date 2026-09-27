@@ -21,6 +21,9 @@ theme:
       - {label: News, url: /posts/}
       - {label: Kite, url: https://github.com/kite-plus/kite}
     tagline: A documentation theme for Kite
+    logo: /images/logo.svg
+    logo_dark: /images/logo-dark.svg
+    show_title: true
     button_label: Download
     button_url: https://github.com/kite-plus/theme-vane/releases
     sidebar:
@@ -43,38 +46,88 @@ theme:
           - {label: Settings reference, url: /settings-reference/}
     announcement: false
     announcement_text: Vane is in early development, and its settings may still change.
-    announcement_link: /posts/vane-0-1/
-    badge_tag: "0.1"
-    badge_text: The first release is out
-    badge_link: /posts/vane-0-1/
-    hero_title: Docs that show the way
-    hero_text: Vane is a documentation theme for Kite. A home page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
+    announcement_link: /posts/vane-0-2/
+    badge_tag: "0.2"
+    badge_text: Vane is drawn on paper now
+    badge_link: /posts/vane-0-2/
+    hero_title: |-
+      Docs that
+      *show the way*
+    hero_text: Vane is a documentation theme for Kite, drawn on paper in ink. A home page with a kite in its sky, docs in an ordered tree with a table of contents, and news, by day and by night.
     actions:
       - {label: Get started, url: /introduction/}
-      - {label: Quick start, url: /quick-start/}
-    hero_command: unzip vane-0.1.0.zip -d themes
-    hero_image: /images/docs-light.webp
-    hero_image_dark: /images/docs-dark.webp
+      - {label: GitHub, url: https://github.com/kite-plus/theme-vane}
+    hero_command: unzip vane-0.2.0.zip -d themes
+    showcase_label: Docs and news
+    showcase_title: Every page on the same paper
+    showcase_text: Underneath, a page of the docs with its tree and its contents. On top, a post from the news.
+    showcase_image: /images/docs-light.webp
+    showcase_image_dark: /images/docs-dark.webp
+    showcase_alt: A page of Vane's own docs, with the docs tree beside it
+    showcase_image2: /images/post-light.webp
+    showcase_image2_dark: /images/post-dark.webp
+    showcase_alt2: A post in Vane's news
+    showcase_note: Press Publish
+    showcase_note_text: and the post is in the news
+    features_label: Four things
     features_title: What it draws
     features:
       - title: Docs in reading order
         text: Groups and pages in the order you choose, with previous and next links that follow it.
         link: /navigation-and-the-docs-tree/
+        sample: page
+        page_title: Writing docs
+        page_text: Headings, notes, code and tables, as Vane draws them.
+        page_chips:
+          - {icon: folder, label: Writing}
+          - {icon: file, label: 4 min read}
+          - {icon: link, label: /writing-docs/}
       - title: Configured in the studio
         text: Every setting is a form in Kite's studio, tried on the whole site before you save.
         link: /settings-reference/
-      - title: Light and dark
+        sample: code
+        code_title: kite.yaml
+        code: |-
+          - accent: "#3a66c4"
+          + accent: "#0f766e"
+            color_scheme: auto
+      - title: Day and night
         text: Follows the reader's system, remembers their choice, and keeps its contrast either way.
         link: /brand-and-colors/
-      - title: Nothing from third parties
-        text: No web fonts and no scripts from elsewhere. Every page works without a script.
+        sample: pictures
+        picture: /images/home-light.webp
+        picture_dark: /images/home-dark.webp
+        picture2: /images/home-dark.webp
+        picture2_dark: /images/home-light.webp
+        pills:
+          - {icon: monitor, label: Automatic}
+          - {icon: sun, label: Day}
+          - {icon: moon, label: Night}
+      - title: What a docs site needs
+        text: A search, code blocks you can copy, news with a feed, and tags. Nothing is loaded from a third party.
         link: /introduction/
+        sample: tiles
+        tiles:
+          - {icon: search, label: Search}
+          - {icon: code, label: Code blocks}
+          - {icon: rss, label: News feed}
+          - {icon: tags, label: Tags}
+    gallery_label: By day and by night
+    gallery_title: One theme, two schemes
+    gallery_text: The toggle in the header steps through automatic, night and day, and the browser remembers the choice.
+    gallery:
+      - image: /images/home-light.webp
+        title: Day
+        note: Warm paper and ink
+      - image: /images/home-dark.webp
+        title: Night
+        note: A kite that glows
     more_title: More for Kite
     more_text: Vane is one of the official add-ons for Kite, each in its own repository.
     more:
-      - {title: Kite, text: "The program itself, with its default theme and the studio.", note: "0.1", link: https://github.com/kite-plus/kite}
-      - {title: Official plugins, text: "Comments, analytics, search, and math with diagrams.", note: 4 plugins, link: https://github.com/kite-plus/plugin-search}
-      - {title: Your theme, text: Write one against the same contract and install it from a zip., note: Guide, link: /settings-reference/}
+      - {title: Kite, text: "The program itself, with its default theme and the studio.", note: "0.1", link: https://github.com/kite-plus/kite, link_label: GitHub}
+      - {title: Official plugins, text: "Comments, analytics, search, and math with diagrams.", note: 4 plugins, link: https://github.com/kite-plus/plugin-search, link_label: Search on GitHub}
+      - {title: Your theme, text: Write one against the same contract and install it from a zip., note: Guide, note_quiet: true, link: /settings-reference/, link_label: Settings reference}
     social:
       github: https://github.com/kite-plus
     footer_columns:

@@ -1,10 +1,10 @@
 # Vane
 
-Vane is a documentation theme for [Kite](https://github.com/kite-plus/kite):
-a home page, documents in a tree with their own order, news, and search, in
-light and dark. It is named after the weather vane, which turns to show
-which way the wind blows: a docs site is there to show the way, and Kite
-flies on the wind.
+Vane is a documentation theme for [Kite](https://github.com/kite-plus/kite),
+drawn on paper in ink: a home page with a kite in its sky, documents in a tree
+with their own order, news, and search, by day and by night. It is named
+after the weather vane, which turns to show which way the wind blows: a docs
+site is there to show the way, and Kite flies on the wind.
 
 ![Vane's home page, in the example site](screenshot.webp)
 
@@ -17,13 +17,17 @@ does not bundle this one.
 
 ## What it draws
 
-Vane is drawn in black, white and grays, with hairlines where other themes
-put gray panels. The accent color you choose marks only the underline of
-links, the keyboard focus and the matches of a search.
+Vane is drawn on warm paper in ink, with a faint grain and headings in a
+serif. At night the paper turns to a dark sky. The accent color you choose
+draws the kite, the seals that number the features, the underline of links
+and the keyboard focus; buttons stay in ink.
 
-- **A home page**: a badge for news, a headline, buttons and a command a
-  reader can copy, a wide screenshot in a frame, a numbered grid of features,
-  and the latest news.
+- **A home page**: a badge for news and a headline under a sky where a paper
+  kite flies, its string tied down by the buttons and a command a reader can
+  copy; at night the kite glows under the moon and stars. Under it, two
+  windows of the product with a note between them, the features as paper
+  tags hung on one string, each with a small sample the theme draws, a band
+  of pictures, the latest news and closing cards.
 - **Docs** in the groups and the order you set, each page with the tree
   beside it, the time it takes to read, a table of contents, and links to the
   pages before and after it.
@@ -35,13 +39,15 @@ links, the keyboard focus and the matches of a search.
   official [Search](https://github.com/kite-plus/plugin-search) plugin on the
   site, the box in the header opens its search of the whole text instead.
 - **News** from Kite's posts, with tags, categories and an RSS feed.
-- **Light and dark**: the button in the header steps through automatic (the
-  reader's system), dark and light, and the browser remembers the choice.
+- **Day and night**: the button in the header steps through automatic (the
+  reader's system), night and day, and the browser remembers the choice.
   The new scheme spreads from the button as a circle where the browser has
   view transitions, and switches at once where it has not or where the
   reader asks for less motion.
 
 Every page works without a script, and nothing is loaded from a third party.
+Headings use Noto Serif SC when the site loads it, as www.kite.plus does, and
+the serifs of the reader's system otherwise.
 
 ## Using it
 
