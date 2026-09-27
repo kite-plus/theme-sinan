@@ -30,6 +30,15 @@
 {{- else if eq .k "news" }}{{ if $zh }}新闻{{ else }}News{{ end }}
 {{- else if eq .k "latest_news" }}{{ if $zh }}最新动态{{ else }}Latest news{{ end }}
 {{- else if eq .k "all_news" }}{{ if $zh }}全部新闻{{ else }}All news{{ end }}
+{{- else if eq .k "learn_more" }}{{ if $zh }}了解更多{{ else }}Learn more{{ end }}
+{{- else if eq .k "numeral" }}
+  {{- /* The number on a feature's seal: a financial numeral in Chinese,
+         which a seal carries, and a figure otherwise. */ -}}
+  {{- $d := printf "%.0f" .n }}
+  {{- if not $zh }}{{ $d }}
+  {{- else if eq $d "1" }}壹{{ else if eq $d "2" }}贰{{ else if eq $d "3" }}叁{{ else if eq $d "4" }}肆{{ else if eq $d "5" }}伍
+  {{- else if eq $d "6" }}陆{{ else if eq $d "7" }}柒{{ else if eq $d "8" }}捌{{ else if eq $d "9" }}玖{{ else if eq $d "10" }}拾
+  {{- else }}{{ $d }}{{ end }}
 {{- else if eq .k "get_started" }}{{ if $zh }}开始阅读{{ else }}Get started{{ end }}
 {{- else if eq .k "updated" }}{{ if $zh }}最后更新于 {{ time.Format "2006 年 1 月 2 日" .t }}{{ else }}Last updated on {{ time.Format "January 2, 2006" .t }}{{ end }}
 {{- else if eq .k "date" }}{{ if $zh }}{{ time.Format "2006 年 1 月 2 日" .t }}{{ else }}{{ time.Format "January 2, 2006" .t }}{{ end }}

@@ -1,0 +1,14 @@
+{{- /* A feature's labels, each with an icon. One that is a path, starting
+       with a slash, is set in the code font. Called as: partial "chips.html"
+       (dict "items" .chips "class" C). */ -}}
+{{- $any := false }}
+{{- range .items }}{{ if .label }}{{ $any = true }}{{ end }}{{ end }}
+{{- if $any }}
+<ul class="{{ .class }}">
+  {{- range .items }}
+    {{- if .label }}
+  <li{{ if str.HasPrefix "/" .label }} class="path"{{ end }}>{{ with .icon }}{{ partial "icon.html" . }}{{ end }}<span>{{ .label }}</span></li>
+    {{- end }}
+  {{- end }}
+</ul>
+{{- end }}

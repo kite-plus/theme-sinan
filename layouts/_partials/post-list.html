@@ -4,7 +4,7 @@
 <ul class="post-list">
   {{- range .Pages }}
   <li class="post-item">
-    <time datetime="{{ time.Format "2006-01-02" .PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" .PublishDate) }}</time>
+    <time datetime="{{ time.Format "2006-01-02" .PublishDate }}">{{ time.Format "2006 · 01 · 02" .PublishDate }}</time>
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     {{- with .Excerpt }}
     <p class="excerpt">{{ . }}</p>

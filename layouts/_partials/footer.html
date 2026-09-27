@@ -32,7 +32,7 @@
       <p class="copyright">{{ with $s.copyright }}{{ . }}{{ else }}&copy; {{ time.Format "2006" .Site.BuildTime }} {{ .Site.Title }}{{ end }}</p>
       <p class="credit">
         <a href="{{ url.Rel "rss.xml" }}">{{ partial "icon.html" "rss" }}RSS</a>
-        <span class="powered">{{ partial "t.html" (dict "k" "powered_pre" "lang" $lang) }}<a href="https://github.com/kite-plus/kite" rel="noopener">{{ partial "icon.html" "kite" }}Kite</a>{{ partial "t.html" (dict "k" "powered_post" "lang" $lang) }}</span>
+        <span class="powered">{{ partial "t.html" (dict "k" "powered_pre" "lang" $lang) }}<a href="https://github.com/kite-plus/kite" rel="noopener">Kite</a>{{ partial "t.html" (dict "k" "powered_post" "lang" $lang) }}</span>
       </p>
     </div>
   </div>

@@ -2,12 +2,6 @@
 {{- $s := .Site.ThemeSettings -}}
 <header class="site-header">
   <div class="header-inner">
-    {{- if or $s.nav $s.sidebar }}
-    {{- /* The menu is the checkbox before the header, which works without a
-           script; this label is only its face, so it is hidden from
-           assistive technology, which reaches the checkbox itself. */}}
-    <label for="nav-toggle" class="menu-button icon-button" title="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}" aria-hidden="true">{{ partial "icon.html" "menu" }}</label>
-    {{- end }}
     {{ partial "brand.html" . }}
     <span class="brand-section" aria-hidden="true">{{ partial "t.html" (dict "k" "docs" "lang" $lang) }}</span>
     {{- with $s.nav }}
@@ -29,6 +23,12 @@
       <button type="button" class="icon-button theme-toggle" data-theme-toggle data-auto="{{ $modes.auto }}" data-dark="{{ $modes.dark }}" data-light="{{ $modes.light }}" data-switch-to="{{ $switchTo }}" title="{{ $toggle }}" aria-label="{{ $toggle }}"><span data-theme-icon="auto">{{ partial "icon.html" "monitor" }}</span><span data-theme-icon="dark">{{ partial "icon.html" "moon" }}</span><span data-theme-icon="light">{{ partial "icon.html" "sun" }}</span></button>
       {{- if and $s.button_label $s.button_url }}
       {{ partial "link.html" (dict "label" $s.button_label "url" $s.button_url "lang" $lang "class" "button primary header-button") }}
+      {{- end }}
+      {{- if or $s.nav $s.sidebar }}
+      {{- /* The menu is the checkbox before the header, which works without a
+             script; this label is only its face, so it is hidden from
+             assistive technology, which reaches the checkbox itself. */}}
+      <label for="nav-toggle" class="menu-button icon-button" title="{{ partial "t.html" (dict "k" "menu" "lang" $lang) }}" aria-hidden="true">{{ partial "icon.html" "menu" }}</label>
       {{- end }}
     </div>
   </div>

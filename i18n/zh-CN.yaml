@@ -2,14 +2,17 @@
 # theme.yaml; anything missing here is shown as written there.
 theme:
   title: 风标
-  description: 为产品文档、项目官网和知识库设计的文档主题，黑白灰加细线。首页、按顺序排列的文档目录、页内目录和新闻，支持浅色与深色，不从第三方加载任何资源。
+  description: 为产品文档、项目官网和知识库设计的文档主题，纸上落墨。天空里飘着风筝的首页、按顺序排列的文档目录、页内目录和新闻，白天与夜晚两种样子，不从第三方加载任何资源。
 
   settings:
     brand:
       label: 品牌
     logo:
       label: 标志
-      help: 显示在页头的站点标题前。建议使用 SVG，或高约 64 像素的图片。
+      help: 显示在页头和页脚的站点标题前。建议使用 SVG，或高约 64 像素的图片。
+    logo_dark:
+      label: 深色时的标志
+      help: 页面是深色时换成这个标志。留空时深浅色都用上面那个。
     show_title:
       label: 在标志旁显示站点标题
       help: 标志里已经写着名字时可以关掉。
@@ -25,19 +28,22 @@ theme:
       help: 页面被分享到聊天软件或社交网站时显示的图，页面自己有封面图时用封面。建议用 1200×630 像素的 PNG 或 JPEG。
     accent:
       label: 强调色
-      help: 用于链接的下划线、键盘焦点和搜索结果里的高亮。按钮和当前页保持黑白。深色模式下主题会自动调亮。
+      help: 天空里的风筝、印章、链接和键盘焦点用这个颜色，按钮保持墨色。夜里主题会自动调亮。
       options:
-        "#3d65bd": 风筝蓝
+        "#3a66c4": 风筝蓝
         "#0f766e": 青绿
         "#6d4fc2": 紫罗兰
         "#b4530e": 赭橙
     color_scheme:
-      label: 浅色或深色
+      label: 白天或夜晚
       help: 读者第一次看到的样子，之后仍可以用页头的按钮切换。
       options:
         auto: 跟随读者的系统
-        light: 浅色
-        dark: 深色
+        light: 白天
+        dark: 夜晚
+    texture:
+      label: 纸张纹理
+      help: 在页面上铺一层很淡的纸张纤维。
 
     navigation:
       label: 导航
@@ -52,7 +58,7 @@ theme:
           label: 地址
     button_label:
       label: 页头按钮
-      help: 页头最右边的黑色按钮，例如下载链接。留空就不显示。
+      help: 页头最右边的墨色按钮，例如下载链接。留空就不显示。
       placeholder: 下载
     button_url:
       label: 页头按钮地址
@@ -85,26 +91,26 @@ theme:
       help: 留空时公告栏不是链接。
 
     home:
-      label: 首页
+      label: 首页：标题
     badge_text:
       label: 标签条
       help: 标题上方的一行短句，例如新版本发布的消息。留空就不显示。
       placeholder: 第一个版本发布了
     badge_tag:
       label: 标签
-      help: 标签条开头的黑底小字，例如版本号。
+      help: 标签条开头盖着强调色的小字，例如版本号。
     badge_link:
       label: 标签条链接
       help: 留空时标签条不是链接。
     hero_title:
       label: 标题
-      help: 留空时使用站点标题。换行的地方，标题里也换行。
+      help: 留空时使用站点标题。换行的地方，标题里也换行；用两个星号括起来的字，*像这样*，下面会画一道线。
     hero_text:
       label: 标语
       help: 标题下的一两句话。留空时使用站点描述。
     actions:
       label: 按钮
-      help: 第一个是黑色的主按钮。留空时首页链接到文档目录的第一页。
+      help: 第一个是墨色的主按钮；链接到 GitHub 的按钮带着 GitHub 的标志。留空时首页链接到文档目录的第一页。
       fields:
         label:
           label: 文字
@@ -114,19 +120,57 @@ theme:
     hero_command:
       label: 命令
       help: 显示在按钮旁、读者可以一键复制的命令，例如安装产品的命令。
-    hero_image:
-      label: 配图
-      help: 产品的宽幅截图，加边框显示在标题下方。
-    hero_image_dark:
-      label: 深色时的配图
-      help: 页面是深色时换成这张。留空时深浅色都用上面那张。
+    hero_art:
+      label: 在天上画一只风筝
+      help: 标题后面的云间飘着一只纸风筝，线拴在按钮上；夜里换成月亮、星星和一只发光的风筝。风筝用强调色。
+
+    home_showcase:
+      label: 首页：产品
+    showcase_label:
+      label: 小标题
+      help: 标题上方的一行红色小字。
+      placeholder: 写 · 读
+    showcase_title:
+      label: 标题
+    showcase_text:
+      label: 文字
+      help: 标题下的一两句话。
+    showcase_image:
+      label: 主图
+      help: 产品的宽幅截图，画在一扇窗里。手机上放大显示它的中间部分。留空时不显示这一节。
+    showcase_image_dark:
+      label: 深色时的主图
+      help: 留空时深浅色都用主图。
+    showcase_alt:
+      label: 主图的内容
+      help: 读给看不见图片的读者听。
+    showcase_image2:
+      label: 第二张图
+      help: 画在一扇小一些的窗里，压在主图的一角，例如产品做出来的东西。留空时只画主图，占满整个宽度。
+    showcase_image2_dark:
+      label: 深色时的第二张图
+    showcase_alt2:
+      label: 第二张图的内容
+    showcase_note:
+      label: 批注
+      help: 写在第二张图旁边的几个字，带一个指向它的箭头。
+      placeholder: 点「发布」
+    showcase_note_text:
+      label: 批注第二行
+      placeholder: 文章就到了站点上
+
+    home_features:
+      label: 首页：特性
+    features_label:
+      label: 小标题
+      help: 标题上方的一行红色小字。
+      placeholder: 四件事
     features_title:
-      label: 特性标题
-      help: 特性上方的小标题。
+      label: 标题
       placeholder: 能做什么
     features:
       label: 特性
-      help: 标题下方的格子，按顺序编号，每格一个标题和一句话，填了链接就能点。
+      help: 用一根线串起来挂在页面上的纸签，每张盖一枚编号印章，写一个标题和一句话，填了链接就能点。纸签上还可以画一个小样例。
       fields:
         title:
           label: 标题
@@ -134,19 +178,173 @@ theme:
           label: 文字
         link:
           label: 链接
+        sample:
+          label: 样例
+          help: 主题画在文字下面的一张小图。
+          options:
+            none: 不画
+            page: 一篇文章的开头
+            code: 一处文件改动
+            tiles: 几块方格
+            pictures: 两张图片
+        page_title:
+          label: 文章标题
+        page_text:
+          label: 文章摘要
+        page_chips:
+          label: 文章标签
+          help: 文章的分类、标签或地址，各带一个图标。以斜杠开头的会用代码字体。
+          fields:
+            icon:
+              label: 图标
+              options:
+                none: 无
+                archive: 归档
+                chart: 图表
+                code: 代码
+                container: 容器
+                file: 文件
+                folder: 文件夹
+                git-branch: 分支
+                github: GitHub
+                globe: 地球
+                image: 图片
+                link: 链接
+                lock: 锁
+                message: 消息
+                monitor: 屏幕
+                moon: 月亮
+                palette: 调色板
+                puzzle: 拼图
+                rss: 订阅
+                search: 搜索
+                sigma: 求和
+                sun: 太阳
+                tags: 标签
+                terminal: 终端
+            label:
+              label: 文字
+        code_title:
+          label: 文件
+        code:
+          label: 内容
+          help: 以 + 开头的行画成新增，以 - 开头的行画成删除。
+        tiles:
+          label: 方格
+          help: 每行两块，每块一段文字和一个图标。
+          fields:
+            icon:
+              label: 图标
+              options:
+                none: 无
+                archive: 归档
+                chart: 图表
+                code: 代码
+                container: 容器
+                file: 文件
+                folder: 文件夹
+                git-branch: 分支
+                github: GitHub
+                globe: 地球
+                image: 图片
+                link: 链接
+                lock: 锁
+                message: 消息
+                monitor: 屏幕
+                moon: 月亮
+                palette: 调色板
+                puzzle: 拼图
+                rss: 订阅
+                search: 搜索
+                sigma: 求和
+                sun: 太阳
+                tags: 标签
+                terminal: 终端
+            label:
+              label: 文字
+        picture:
+          label: 第一张图
+        picture_dark:
+          label: 深色时的第一张图
+        picture2:
+          label: 第二张图
+        picture2_dark:
+          label: 深色时的第二张图
+        pills:
+          label: 标签
+          help: 用强调色画在图片旁边。
+          fields:
+            icon:
+              label: 图标
+              options:
+                none: 无
+                archive: 归档
+                chart: 图表
+                code: 代码
+                container: 容器
+                file: 文件
+                folder: 文件夹
+                git-branch: 分支
+                github: GitHub
+                globe: 地球
+                image: 图片
+                link: 链接
+                lock: 锁
+                message: 消息
+                monitor: 屏幕
+                moon: 月亮
+                palette: 调色板
+                puzzle: 拼图
+                rss: 订阅
+                search: 搜索
+                sigma: 求和
+                sun: 太阳
+                tags: 标签
+                terminal: 终端
+            label:
+              label: 文字
+
+    home_gallery:
+      label: 首页：图片
+    gallery_label:
+      label: 小标题
+      help: 标题上方的一行红色小字。
+      placeholder: 主题
+    gallery_title:
+      label: 标题
+    gallery_text:
+      label: 文字
+    gallery:
+      label: 图片
+      help: 像照片一样放在一条深一些的纸带上，每行两张，每张配一行说明，填了链接就能点。
+      fields:
+        image:
+          label: 图片
+        image_dark:
+          label: 深色时的图片
+        title:
+          label: 说明
+        note:
+          label: 备注
+          help: 写在说明另一头的几个字。
+        link:
+          label: 链接
+
+    home_end:
+      label: 首页：动态和更多
     show_news:
       label: 显示最新动态
-      help: 在特性下面列出最新的三篇文章。
+      help: 列出最新的三篇文章。
     more_title:
       label: 末尾标题
-      help: 首页末尾那一列的小标题，例如相关项目。
+      help: 首页末尾卡片旁边的标题，例如相关项目。
       placeholder: 更多
     more_text:
       label: 末尾说明
       help: 末尾标题下的一句话。
     more:
-      label: 末尾列表
-      help: 首页末尾的几行，每行一个标题和一句话，可以附一条简短的备注（例如状态），填了链接就能点。
+      label: 末尾卡片
+      help: 首页末尾的几张卡片，每张一个标题和一句话，可以附一条简短的备注（例如状态），填了链接就能点。
       fields:
         title:
           label: 标题
@@ -155,8 +353,14 @@ theme:
         note:
           label: 备注
           placeholder: 开发中
+        note_quiet:
+          label: 灰色备注
+          help: 用于还没发布的东西。
         link:
           label: 链接
+        link_label:
+          label: 链接文字
+          placeholder: 了解更多
 
     docs:
       label: 文档

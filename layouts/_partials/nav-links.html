@@ -1,6 +1,7 @@
-{{- /* The header links. The one to where the reader is is marked, and so is
-       a link into the docs tree anywhere in the docs, and the news listing
-       anywhere in the news. Called with the page's context. */ -}}
+{{- /* The header links. The one to where the reader is is marked. Anywhere
+       else in the docs the first link into the docs tree is, unless another
+       link leads to the very page, and anywhere in the news the news
+       listing is. Called with the page's context. */ -}}
 {{- $lang := .Site.Language -}}
 {{- $site := .Site -}}
 {{- $here := .Page.RelPermalink -}}
@@ -8,11 +9,20 @@
 {{- $inDocs := and (eq $kind "single") (partial "tree-has.html" (dict "site" .Site "url" $here)) -}}
 {{- $inNews := and (ne $kind "home") (or (eq .Page.Type "post") (eq $kind "taxonomy") (eq $kind "term")) -}}
 {{- $news := url.For "list" "post" -}}
+{{- $anyExact := false -}}
+{{- $docs := "" -}}
+{{- range .Site.ThemeSettings.nav }}
+  {{- if and .label .url }}
+    {{- $u := url.Rel .url }}
+    {{- if or (eq $u $here) (eq (printf "%s/" $u) $here) }}{{ $anyExact = true }}{{ end }}
+    {{- if and (not $docs) (partial "tree-has.html" (dict "site" $site "url" $u)) }}{{ $docs = $u }}{{ end }}
+  {{- end }}
+{{- end }}
 {{- range .Site.ThemeSettings.nav }}
   {{- if and .label .url }}
     {{- $u := url.Rel .url }}
     {{- $exact := or (eq $u $here) (eq (printf "%s/" $u) $here) }}
-    {{- $current := or $exact (and $inDocs (partial "tree-has.html" (dict "site" $site "url" $u))) (and $inNews (eq $u $news)) }}
+    {{- $current := or $exact (and $inDocs (not $anyExact) (eq $u $docs)) (and $inNews (eq $u $news)) }}
     {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "current" $current "exact" $exact) }}
   {{- end }}
 {{- end -}}

@@ -1,0 +1,44 @@
+{{- /* The small picture under a feature's text, drawn by the theme from the
+       feature's settings: the head of a page as the studio shows it, a
+       change to a file, a set of tiles, or two pictures. Called with the
+       feature. */ -}}
+{{- if eq .sample "page" }}
+  {{- if or .page_title .page_text }}
+<div class="sample sample-page">
+  {{- with .page_title }}<b>{{ . }}</b>{{ end }}
+  {{- with .page_text }}<small>{{ . }}</small>{{ end }}
+  {{- partial "chips.html" (dict "items" .page_chips "class" "sample-chips") }}
+</div>
+  {{- end }}
+{{- else if eq .sample "code" }}
+  {{- with .code }}
+<div class="sample sample-code">
+  {{- with $.code_title }}
+  <div class="code-path">{{ . }}</div>
+  {{- end }}
+  {{- /* A line that starts with + was added and one with - removed, as in
+         a diff. */}}
+  <pre><code>
+  {{- range str.Split "\n" (str.TrimSuffix "\n" .) }}
+    {{- $class := "line" }}
+    {{- if str.HasPrefix "+" . }}{{ $class = "line add" }}{{ else if str.HasPrefix "-" . }}{{ $class = "line del" }}{{ end -}}
+    <span class="{{ $class }}">{{ . }}</span>
+  {{- end -}}
+  </code></pre>
+</div>
+  {{- end }}
+{{- else if eq .sample "tiles" }}
+  {{- with partial "chips.html" (dict "items" .tiles "class" "sample-tiles") }}
+<div class="sample">{{ . }}</div>
+  {{- end }}
+{{- else if eq .sample "pictures" }}
+  {{- if or .picture .picture2 }}
+<div class="sample sample-pictures">
+  <div class="sample-thumbs">
+    {{- with .picture }}<span class="thumb first">{{ partial "picture.html" (dict "src" . "dark" $.picture_dark) }}</span>{{ end }}
+    {{- with .picture2 }}<span class="thumb second">{{ partial "picture.html" (dict "src" . "dark" $.picture2_dark) }}</span>{{ end }}
+  </div>
+  {{- partial "chips.html" (dict "items" .pills "class" "sample-pills") }}
+</div>
+  {{- end }}
+{{- end }}

@@ -1,8 +1,10 @@
 {{- /* The site's logo and title, linking home, in the header and the footer.
-       Called with the page's context. */ -}}
+       A logo for dark pages takes the logo's place on one. Called with the
+       page's context. */ -}}
 {{- $s := .Site.ThemeSettings -}}
 <a class="brand" href="{{ url.For "home" }}">
-  {{- with $s.logo }}<img class="logo" src="{{ url.Rel . }}" alt="">{{ end }}
+  {{- with $s.logo }}<img class="logo{{ if $s.logo_dark }} only-light{{ end }}" src="{{ url.Rel . }}" alt="">{{ end }}
+  {{- if $s.logo }}{{ with $s.logo_dark }}<img class="logo only-dark" src="{{ url.Rel . }}" alt="">{{ end }}{{ end }}
   {{- if or $s.show_title (not $s.logo) }}<span class="brand-name">{{ .Site.Title }}</span>
   {{- else }}<span class="sr-only">{{ .Site.Title }}</span>{{ end -}}
 </a>

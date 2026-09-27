@@ -55,8 +55,8 @@
   <meta property="article:published_time" content="{{ time.Format "2006-01-02T15:04:05Z07:00" .Page.PublishDate }}">
   {{- end }}
   <meta name="twitter:card" content="{{ if $image }}summary_large_image{{ else }}summary{{ end }}">
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-  <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#f5f1e8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121317" media="(prefers-color-scheme: dark)">
   <link rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ url.Rel "rss.xml" }}">
   {{- with $s.favicon }}
   <link rel="icon" href="{{ url.Rel . }}">

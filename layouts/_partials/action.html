@@ -1,0 +1,10 @@
+{{- /* A button under the headline of the home page. The main one is ink and
+       points on; one on GitHub carries its mark. Called as: partial
+       "action.html" (dict "label" L "url" U "lang" .Site.Language "main" M). */ -}}
+{{- $external := or (str.HasPrefix "http://" .url) (str.HasPrefix "https://" .url) -}}
+<a class="button{{ if .main }} primary{{ end }}" href="{{ url.Rel .url }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>
+  {{- if str.Contains "github.com" .url }}{{ partial "icon.html" "github" }}{{ end }}{{ .label }}
+  {{- if .main }}{{ partial "icon.html" "next" }}{{ end }}
+  {{- if $external }}<span class="sr-only">{{ partial "t.html" (dict "k" "new_tab" "lang" .lang) }}</span>{{ end -}}
+</a>
+{{- /**/ -}}

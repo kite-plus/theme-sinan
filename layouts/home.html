@@ -13,92 +13,153 @@
   {{ partial "pagination.html" . }}
 </div>
 {{- else }}
+<div class="home">
 <section class="hero">
-  {{- with $s.badge_text }}
-  {{- if $s.badge_link }}<a class="badge" href="{{ url.Rel $s.badge_link }}">{{ else }}<p class="badge">{{ end }}
-    {{- with $s.badge_tag }}<span class="badge-tag">{{ . }}</span>{{ end }}<span>{{ . }}</span>
-  {{- if $s.badge_link }}{{ partial "icon.html" "next" }}</a>{{ else }}</p>{{ end }}
+  {{- if $s.hero_art }}
+  {{ partial "sky.html" . }}
   {{- end }}
-  <h1 class="hero-title">{{ with $s.hero_title }}{{ range $i, $line := str.Split "\n" . }}{{ if $i }}<br>{{ end }}{{ $line }}{{ end }}{{ else }}{{ $site.Title }}{{ end }}</h1>
-  {{- $tagline := $s.hero_text }}
-  {{- if not $tagline }}{{ $tagline = $site.Description }}{{ end }}
-  {{- with $tagline }}
-  <p class="hero-tagline">{{ . }}</p>
-  {{- end }}
-  {{- $first := "" }}
-  {{- range $s.sidebar }}{{ range .pages }}{{ if and .label .url (not $first) }}{{ $first = .url }}{{ end }}{{ end }}{{ end }}
-  {{- $any := false }}
-  {{- range $s.actions }}{{ if and .label .url }}{{ $any = true }}{{ end }}{{ end }}
-  {{- if or $any $first $s.hero_command }}
-  <div class="hero-actions">
-    {{- if $any }}
-      {{- $main := true }}
-      {{- range $s.actions }}
-        {{- if and .label .url }}
-          {{- $class := "button" }}
-          {{- if $main }}{{ $class = "button primary" }}{{ end }}
-    {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "class" $class) }}
-          {{- $main = false }}
-        {{- end }}
-      {{- end }}
-    {{- else if $first }}
-    {{ partial "link.html" (dict "label" (partial "t.html" (dict "k" "get_started" "lang" $lang)) "url" $first "lang" $lang "class" "button primary") }}
+  <div class="hero-inner">
+    {{- with $s.badge_text }}
+    {{- if $s.badge_link }}<a class="badge" href="{{ url.Rel $s.badge_link }}">{{ else }}<p class="badge">{{ end }}
+      {{- with $s.badge_tag }}<span class="badge-tag">{{ . }}</span>{{ end }}<span>{{ . }}</span>
+    {{- if $s.badge_link }}{{ partial "icon.html" "next" }}</a>{{ else }}</p>{{ end }}
     {{- end }}
-    {{- with $s.hero_command }}
-    <div class="command"><span class="prompt" aria-hidden="true">$</span><code>{{ . }}</code></div>
+    {{- /* A line of the headline starts a new line, and words between two
+           asterisks are underlined. */}}
+    <h1 class="hero-title">
+      {{- with $s.hero_title }}
+        {{- range $i, $line := str.Split "\n" . }}
+          {{- if $i }}<br>{{ end }}
+          {{- range $j, $part := str.Split "*" $line }}
+            {{- if eq (math.Mod $j 2) 1 }}<span class="mark">{{ $part }}<svg class="mark-line" viewBox="0 0 300 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M4 14 C 60 6, 140 4, 296 11"/></svg></span>
+            {{- else }}{{ $part }}{{ end }}
+          {{- end }}
+        {{- end }}
+      {{- else }}{{ $site.Title }}{{ end -}}
+    </h1>
+    {{- $tagline := $s.hero_text }}
+    {{- if not $tagline }}{{ $tagline = $site.Description }}{{ end }}
+    {{- with $tagline }}
+    <p class="hero-tagline">{{ . }}</p>
+    {{- end }}
+    {{- $first := "" }}
+    {{- range $s.sidebar }}{{ range .pages }}{{ if and .label .url (not $first) }}{{ $first = .url }}{{ end }}{{ end }}{{ end }}
+    {{- $any := false }}
+    {{- range $s.actions }}{{ if and .label .url }}{{ $any = true }}{{ end }}{{ end }}
+    {{- if or $any $first $s.hero_command }}
+    <div class="hero-actions">
+      {{- if $any }}
+        {{- $main := true }}
+        {{- range $s.actions }}
+          {{- if and .label .url }}
+      {{ partial "action.html" (dict "label" .label "url" .url "lang" $lang "main" $main) }}
+            {{- $main = false }}
+          {{- end }}
+        {{- end }}
+      {{- else if $first }}
+      {{ partial "action.html" (dict "label" (partial "t.html" (dict "k" "get_started" "lang" $lang)) "url" $first "lang" $lang "main" true) }}
+      {{- end }}
+      {{- with $s.hero_command }}
+      <div class="command"><span class="prompt" aria-hidden="true">$</span><code>{{ . }}</code></div>
+      {{- end }}
+    </div>
     {{- end }}
   </div>
-  {{- end }}
-  {{- with $s.hero_image }}
-  <figure class="hero-shot">
-    <img{{ if $s.hero_image_dark }} class="only-light"{{ end }} src="{{ url.Rel . }}" alt="">
-    {{- with $s.hero_image_dark }}
-    <img class="only-dark" src="{{ url.Rel . }}" alt="">
-    {{- end }}
-  </figure>
-  {{- end }}
 </section>
-{{- $features := false }}
-{{- range $s.features }}{{ if or .title .text }}{{ $features = true }}{{ end }}{{ end }}
-{{- if $features }}
-<section class="features">
-  {{- with $s.features_title }}
-  <h2 class="section-label">{{ . }}</h2>
-  {{- end }}
-  <div class="feature-grid">
-    {{- $n := 0.0 }}
-    {{- range $s.features }}
-      {{- if or .title .text }}
-        {{- $n = math.Add $n 1 }}
-        {{- if .link }}
-    <a class="feature" href="{{ url.Rel .link }}">
-        {{- else }}
-    <div class="feature">
-        {{- end }}
-      <span class="feature-number" aria-hidden="true">{{ printf "%02.0f" $n }}</span>
-      {{- with .title }}<h3>{{ . }}</h3>{{ end }}
-      {{- with .text }}<p>{{ . }}</p>{{ end }}
-        {{- if .link }}</a>{{ else }}</div>{{ end }}
-      {{- end }}
+{{- /* A site that set the picture under the headline before there was a
+       showcase keeps it, as the showcase's one window. */}}
+{{- $main := $s.showcase_image }}
+{{- $mainDark := $s.showcase_image_dark }}
+{{- if not $main }}{{ $main = $s.hero_image }}{{ $mainDark = $s.hero_image_dark }}{{ end }}
+{{- if $main }}
+<section class="showcase home-section">
+  {{ partial "section-head.html" (dict "label" $s.showcase_label "title" $s.showcase_title "text" $s.showcase_text) }}
+  <div class="stage{{ if not $s.showcase_image2 }} single{{ end }}">
+    <figure class="window window-main">{{ partial "picture.html" (dict "src" $main "dark" $mainDark "alt" $s.showcase_alt) }}</figure>
+    {{- with $s.showcase_image2 }}
+    <figure class="window window-over">{{ partial "picture.html" (dict "src" . "dark" $s.showcase_image2_dark "alt" $s.showcase_alt2) }}</figure>
+    {{- if $s.showcase_note }}
+    <svg class="stage-arrow" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M112 44 C 160 -4, 238 10, 246 188" stroke-dasharray="2 7"/><path d="M236 174 l10 16 l10 -16"/></svg>
+    <svg class="stage-arrow narrow" viewBox="0 0 56 70" aria-hidden="true" focusable="false"><path d="M44 4 C 60 20, 46 44, 20 54" stroke-dasharray="2 6"/><path d="M26 46 l-8 9 l11 3"/></svg>
+    <p class="stage-note">{{ $s.showcase_note }}{{ with $s.showcase_note_text }}<small>{{ . }}</small>{{ end }}</p>
+    {{- end }}
     {{- end }}
   </div>
 </section>
 {{- end }}
+{{- $features := false }}
+{{- range $s.features }}{{ if or .title .text }}{{ $features = true }}{{ end }}{{ end }}
+{{- if $features }}
+<section class="features home-section">
+  {{ partial "section-head.html" (dict "label" $s.features_label "title" $s.features_title) }}
+  <div class="strand">
+    <svg class="spine" viewBox="0 0 30 960" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M15 0 C 29 140, 1 290, 15 450 S 29 760, 15 960"/></svg>
+    <ol class="tags">
+      {{- $n := 0.0 }}
+      {{- range $s.features }}
+        {{- if or .title .text }}
+          {{- $n = math.Add $n 1 }}
+          {{- $external := and .link (or (str.HasPrefix "http://" .link) (str.HasPrefix "https://" .link)) }}
+      <li>
+        {{- if .link }}<a class="tag" href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ else }}<article class="tag">{{ end }}
+          <span class="tag-hole" aria-hidden="true"></span>
+          <svg class="tag-string" viewBox="0 0 72 16" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 2 C 20 0, 48 8, 72 14"/></svg>
+          <svg class="tag-bow" viewBox="-10 -7 20 14" aria-hidden="true" focusable="false"><path d="M0 0 l-9 -6 l1 12 z M0 0 l9 -6 l-1 12 z"/></svg>
+          <div class="tag-head"><span class="seal" aria-hidden="true">{{ partial "t.html" (dict "k" "numeral" "lang" $lang "n" $n) }}</span>{{ with .title }}<h3>{{ . }}</h3>{{ end }}</div>
+          {{- with .text }}
+          <p>{{ . }}</p>
+          {{- end }}
+          {{- partial "sample.html" . }}
+        {{ if .link }}</a>{{ else }}</article>{{ end }}
+      </li>
+        {{- end }}
+      {{- end }}
+    </ol>
+  </div>
+</section>
+{{- end }}
+{{- $photos := false }}
+{{- range $s.gallery }}{{ if .image }}{{ $photos = true }}{{ end }}{{ end }}
+{{- if $photos }}
+<section class="gallery">
+  <svg class="gallery-edge" viewBox="0 0 1440 28" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 28 L0 16 L60 12 L130 18 L210 9 L300 15 L380 8 L470 14 L560 7 L650 13 L740 6 L830 14 L920 8 L1010 15 L1100 9 L1190 16 L1280 10 L1360 15 L1440 11 L1440 28 Z"/></svg>
+  <svg class="gallery-edge narrow" viewBox="0 0 390 18" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 18 L0 10 L30 7 L64 12 L102 5 L140 10 L178 4 L218 9 L256 4 L296 10 L336 5 L364 9 L390 6 L390 18 Z"/></svg>
+  <div class="home-section">
+    {{ partial "section-head.html" (dict "label" $s.gallery_label "title" $s.gallery_title "text" $s.gallery_text) }}
+    <ul class="photos">
+      {{- range $s.gallery }}
+        {{- if .image }}
+          {{- $external := and .link (or (str.HasPrefix "http://" .link) (str.HasPrefix "https://" .link)) }}
+      <li>
+        <figure class="photo">
+          {{- if .link }}<a class="photo-frame" href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ else }}<span class="photo-frame">{{ end }}
+            {{- partial "picture.html" (dict "src" .image "dark" .image_dark "alt" .title) }}
+          {{- if .link }}</a>{{ else }}</span>{{ end }}
+          {{- if or .title .note }}
+          <figcaption>{{ .title }}{{ with .note }}<span>{{ . }}</span>{{ end }}</figcaption>
+          {{- end }}
+        </figure>
+      </li>
+        {{- end }}
+      {{- end }}
+    </ul>
+  </div>
+</section>
+{{- end }}
 {{- if and $s.show_news .Pages }}
-<section class="home-news">
-  <div class="home-news-header">
-    <h2 class="section-label">{{ partial "t.html" (dict "k" "latest_news" "lang" $lang) }}</h2>
-    <a href="{{ url.For "list" "post" }}">{{ partial "t.html" (dict "k" "all_news" "lang" $lang) }}{{ partial "icon.html" "next" }}</a>
+<section class="home-news home-section">
+  <div class="news-head">
+    <h2>{{ partial "t.html" (dict "k" "latest_news" "lang" $lang) }}</h2>
+    <a class="more-link" href="{{ url.For "list" "post" }}">{{ partial "t.html" (dict "k" "all_news" "lang" $lang) }}{{ partial "icon.html" "next" }}</a>
   </div>
   <ul class="news-rows">
     {{- range $i, $p := .Pages }}
       {{- if lt $i 3 }}
     <li><a class="news-row" href="{{ $p.RelPermalink }}">
-      <time datetime="{{ time.Format "2006-01-02" $p.PublishDate }}">{{ time.Format "2006-01-02" $p.PublishDate }}</time>
+      <time datetime="{{ time.Format "2006-01-02" $p.PublishDate }}">{{ time.Format "2006 · 01 · 02" $p.PublishDate }}</time>
       <span class="news-title">{{ $p.Title }}</span>
-      {{- with $p.Excerpt }}
-      <span class="news-excerpt">{{ . }}</span>
-      {{- end }}
+      <span class="news-excerpt">{{ $p.Excerpt }}</span>
+      {{- partial "icon.html" "arrow-up-right" }}
     </a></li>
       {{- end }}
     {{- end }}
@@ -108,27 +169,38 @@
 {{- $more := false }}
 {{- range $s.more }}{{ if .title }}{{ $more = true }}{{ end }}{{ end }}
 {{- if $more }}
-<section class="home-more">
-  {{- with $s.more_title }}
-  <h2 class="section-label">{{ . }}</h2>
+<section class="home-more home-section">
+  {{- if or $s.more_title $s.more_text }}
+  <div class="more-intro">
+    {{- with $s.more_title }}
+    <h2>{{ . }}</h2>
+    {{- end }}
+    {{- with $s.more_text }}
+    <p>{{ . }}</p>
+    {{- end }}
+  </div>
   {{- end }}
-  {{- with $s.more_text }}
-  <p class="more-text">{{ . }}</p>
-  {{- end }}
-  <ul class="news-rows">
+  <ul class="more-cards">
     {{- range $s.more }}
       {{- if .title }}
         {{- $external := and .link (or (str.HasPrefix "http://" .link) (str.HasPrefix "https://" .link)) }}
-    <li>{{ if .link }}<a class="news-row more-row" href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ else }}<div class="news-row more-row">{{ end }}
-      <span class="more-note">{{ .note }}</span>
-      <span class="news-title">{{ .title }}</span>
-      <span class="news-excerpt">{{ .text }}</span>
-      {{- if .link }}{{ if $external }}{{ partial "icon.html" "external" }}{{ else }}{{ partial "icon.html" "next" }}{{ end }}</a>{{ else }}</div>{{ end }}</li>
+    <li class="more-card">
+      <div class="more-card-top">
+        <h3>{{ .title }}</h3>
+        {{- if .note }}<span class="more-note{{ if .note_quiet }} muted{{ end }}">{{ .note }}</span>{{ end }}
+      </div>
+      {{- with .text }}
+      <p>{{ . }}</p>
+      {{- end }}
+      {{- if .link }}
+      <a href="{{ url.Rel .link }}"{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ with .link_label }}{{ . }}{{ else }}{{ partial "t.html" (dict "k" "learn_more" "lang" $lang) }}{{ end }}{{ if $external }}{{ partial "icon.html" "arrow-up-right" }}<span class="sr-only">{{ partial "t.html" (dict "k" "new_tab" "lang" $lang) }}</span>{{ else }}{{ partial "icon.html" "next" }}{{ end }}</a>
+      {{- end }}
+    </li>
       {{- end }}
     {{- end }}
   </ul>
 </section>
 {{- end }}
-<div class="home-end"></div>
+</div>
 {{- end }}
 {{ end }}

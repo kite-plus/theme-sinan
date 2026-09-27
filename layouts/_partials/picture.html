@@ -1,0 +1,4 @@
+{{- /* A picture, and the one shown instead on a dark page if there is one.
+       Called as: partial "picture.html" (dict "src" S "dark" D "alt" A). */ -}}
+<img{{ if .dark }} class="only-light"{{ end }} src="{{ url.Rel .src }}" alt="{{ .alt }}" loading="lazy" decoding="async">
+{{- with .dark }}<img class="only-dark" src="{{ url.Rel . }}" alt="{{ $.alt }}" loading="lazy" decoding="async">{{ end -}}

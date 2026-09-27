@@ -1,15 +1,15 @@
 name: vane
 title: Vane
-version: 0.1.0
+version: 0.2.0
 apiVersion: kite/v1
 requires: ">=0.1.0 <2.0.0"
-description: A documentation theme for product docs, project sites and knowledge bases, drawn in black, white and hairlines. A landing page, docs in an ordered tree with a table of contents, and news, in light and dark, with nothing loaded from third parties.
+description: A documentation theme for product docs, project sites and knowledge bases, drawn on paper in ink. A home page with a kite in its sky, docs in an ordered tree with a table of contents, and news, by day and by night, with nothing loaded from third parties.
 author:
   name: Kite
   url: https://github.com/kite-plus
 license: Apache-2.0
 homepage: https://github.com/kite-plus/theme-vane
-tags: [docs, documentation, minimal, monochrome, dark mode]
+tags: [docs, documentation, paper, serif, dark mode]
 screenshot: screenshot.webp
 
 capabilities: [static, dynamic]
@@ -30,7 +30,11 @@ settings:
       - key: logo
         type: image
         label: Logo
-        help: Shown before the site title in the header. An SVG, or a picture about 64 pixels tall, suits it best.
+        help: Shown before the site title in the header and the footer. An SVG, or a picture about 64 pixels tall, suits it best.
+      - key: logo_dark
+        type: image
+        label: Logo on a dark page
+        help: Shown instead of the logo when the page is dark. Left empty, the logo is shown either way.
       - key: show_title
         type: boolean
         label: Show the site title beside the logo
@@ -52,22 +56,27 @@ settings:
       - key: accent
         type: color
         label: Accent color
-        help: The underline of links, the keyboard focus and the matches of a search. Buttons and the page being read stay black and white. On a dark page the theme lightens it by itself.
-        default: "#3d65bd"
+        help: The kite in the sky, the seals, links and the keyboard focus. Buttons stay in ink. At night the theme lightens it by itself.
+        default: "#3a66c4"
         options:
-          - {value: "#3d65bd", label: Kite blue}
+          - {value: "#3a66c4", label: Kite blue}
           - {value: "#0f766e", label: Teal}
           - {value: "#6d4fc2", label: Violet}
           - {value: "#b4530e", label: Rust}
       - key: color_scheme
         type: select
-        label: Light or dark
+        label: Day or night
         help: What a reader sees first. They can still switch with the button in the header.
         default: auto
         options:
           - {value: auto, label: Follow the reader's system}
-          - {value: light, label: Light}
-          - {value: dark, label: Dark}
+          - {value: light, label: Day}
+          - {value: dark, label: Night}
+      - key: texture
+        type: boolean
+        label: Paper grain
+        help: A faint grain over the page, like the fibers of paper.
+        default: true
 
   - key: navigation
     type: section
@@ -84,7 +93,7 @@ settings:
       - key: button_label
         type: string
         label: Header button
-        help: A black button at the right end of the header, such as a link to the downloads. Left empty, there is none.
+        help: An ink button at the right end of the header, such as a link to the downloads. Left empty, there is none.
         placeholder: Download
       - key: button_url
         type: url
@@ -126,7 +135,7 @@ settings:
 
   - key: home
     type: section
-    label: Home page
+    label: "Home page: the headline"
     preview: home
     fields:
       - key: badge_text
@@ -137,7 +146,7 @@ settings:
       - key: badge_tag
         type: string
         label: Badge tag
-        help: A word or a version drawn in black at the start of the badge.
+        help: A word or a version stamped in the accent color at the start of the badge.
         placeholder: "1.0"
       - key: badge_link
         type: url
@@ -147,7 +156,7 @@ settings:
       - key: hero_title
         type: text
         label: Headline
-        help: Left empty, the site title is used. Each line of it starts a new line in the headline.
+        help: Left empty, the site title is used. Each line of it starts a new line in the headline, and words between two asterisks, *like these*, are underlined.
       - key: hero_text
         type: text
         label: Tagline
@@ -155,7 +164,7 @@ settings:
       - key: actions
         type: repeat
         label: Buttons
-        help: The first one is the main button, drawn in black. Left empty, the home page links to the first page of the docs tree.
+        help: The first one is the main button, drawn in ink. One that leads to GitHub carries its mark. Left empty, the home page links to the first page of the docs tree.
         fields:
           - {key: label, type: string, label: Label, placeholder: Get started}
           - {key: url, type: url, label: Address, placeholder: /introduction/}
@@ -164,36 +173,256 @@ settings:
         label: Command
         help: A command beside the buttons that a reader can copy, such as the one that installs the product.
         placeholder: npm install my-tool
-      - key: hero_image
+      - key: hero_art
+        type: boolean
+        label: Draw a kite in the sky
+        help: A paper kite on a string among clouds behind the headline, its string tied down by the buttons; at night a kite that glows under the moon and stars. It takes the accent color.
+        default: true
+
+  - key: home_showcase
+    type: section
+    label: "Home page: the product"
+    preview: home
+    fields:
+      - key: showcase_label
+        type: string
+        label: Small heading
+        help: A few words in red over the title.
+        placeholder: Write and read
+      - key: showcase_title
+        type: string
+        label: Title
+      - key: showcase_text
+        type: text
+        label: Text
+        help: A sentence or two under the title.
+      - key: showcase_image
         type: image
-        label: Picture
-        help: A wide screenshot of the product, drawn in a frame under the headline.
-      - key: hero_image_dark
+        label: Main picture
+        help: A wide screenshot of the product, drawn in a window. On a phone its middle is shown larger. Left empty, the section is left out.
+      - key: showcase_image_dark
         type: image
-        label: Picture on a dark page
-        help: Shown instead of the picture when the page is dark. Left empty, the picture is shown either way.
+        label: Main picture on a dark page
+        help: Left empty, the main picture is shown either way.
+      - key: showcase_alt
+        type: string
+        label: What the main picture shows
+        help: Read out to those who cannot see it.
+      - key: showcase_image2
+        type: image
+        label: Second picture
+        help: Drawn in a smaller window over a corner of the first, such as what the product makes. Left empty, the first is drawn alone and wide.
+      - key: showcase_image2_dark
+        type: image
+        label: Second picture on a dark page
+      - key: showcase_alt2
+        type: string
+        label: What the second picture shows
+      - key: showcase_note
+        type: string
+        label: Note
+        help: A few words written by the second picture, with an arrow to it.
+        placeholder: Press Publish
+      - key: showcase_note_text
+        type: string
+        label: Note, second line
+        placeholder: and the page is on the site
+
+  - key: home_features
+    type: section
+    label: "Home page: the features"
+    preview: home
+    fields:
+      - key: features_label
+        type: string
+        label: Small heading
+        help: A few words in red over the title.
+        placeholder: Four things
       - key: features_title
         type: string
-        label: Features heading
-        help: A small heading over the features.
+        label: Title
         placeholder: What it does
       - key: features
         type: repeat
         label: Features
-        help: A grid under the headline, numbered in order, each a title and a sentence, and a link if it has one.
+        help: Paper tags hung down the page on one string, each numbered on a seal, with a title, a sentence and a link if it has one. A tag can carry a small sample of what it describes.
         fields:
           - {key: title, type: string, label: Title}
           - {key: text, type: text, label: Text}
           - {key: link, type: url, label: Link}
+          - key: sample
+            type: select
+            label: Sample
+            help: A small picture the theme draws under the text.
+            default: none
+            options:
+              - {value: none, label: None}
+              - {value: page, label: The head of a page}
+              - {value: code, label: A change to a file}
+              - {value: tiles, label: Tiles}
+              - {value: pictures, label: Two pictures}
+          - {key: page_title, type: string, label: Page title, showIf: {sample: page}}
+          - {key: page_text, type: string, label: Page summary, showIf: {sample: page}}
+          - key: page_chips
+            type: repeat
+            label: Page labels
+            help: The page's categories, tags or address, each with an icon. One starting with a slash is set as code.
+            showIf: {sample: page}
+            fields:
+              - key: icon
+                type: select
+                label: Icon
+                default: none
+                options:
+                  - {value: none, label: None}
+                  - {value: archive, label: Archive}
+                  - {value: chart, label: Chart}
+                  - {value: code, label: Code}
+                  - {value: container, label: Container}
+                  - {value: file, label: File}
+                  - {value: folder, label: Folder}
+                  - {value: git-branch, label: Branch}
+                  - {value: github, label: GitHub}
+                  - {value: globe, label: Globe}
+                  - {value: image, label: Picture}
+                  - {value: link, label: Link}
+                  - {value: lock, label: Lock}
+                  - {value: message, label: Message}
+                  - {value: monitor, label: Screen}
+                  - {value: moon, label: Moon}
+                  - {value: palette, label: Palette}
+                  - {value: puzzle, label: Puzzle piece}
+                  - {value: rss, label: Feed}
+                  - {value: search, label: Search}
+                  - {value: sigma, label: Sigma}
+                  - {value: sun, label: Sun}
+                  - {value: tags, label: Tags}
+                  - {value: terminal, label: Terminal}
+              - {key: label, type: string, label: Label}
+          - {key: code_title, type: string, label: File, placeholder: content/posts/hello/index.md, showIf: {sample: code}}
+          - key: code
+            type: code
+            label: Lines
+            help: A line starting with + is drawn as added, and one starting with - as removed.
+            showIf: {sample: code}
+          - key: tiles
+            type: repeat
+            label: Tiles
+            help: Two to a row, each a label with an icon.
+            showIf: {sample: tiles}
+            fields:
+              - key: icon
+                type: select
+                label: Icon
+                default: none
+                options:
+                  - {value: none, label: None}
+                  - {value: archive, label: Archive}
+                  - {value: chart, label: Chart}
+                  - {value: code, label: Code}
+                  - {value: container, label: Container}
+                  - {value: file, label: File}
+                  - {value: folder, label: Folder}
+                  - {value: git-branch, label: Branch}
+                  - {value: github, label: GitHub}
+                  - {value: globe, label: Globe}
+                  - {value: image, label: Picture}
+                  - {value: link, label: Link}
+                  - {value: lock, label: Lock}
+                  - {value: message, label: Message}
+                  - {value: monitor, label: Screen}
+                  - {value: moon, label: Moon}
+                  - {value: palette, label: Palette}
+                  - {value: puzzle, label: Puzzle piece}
+                  - {value: rss, label: Feed}
+                  - {value: search, label: Search}
+                  - {value: sigma, label: Sigma}
+                  - {value: sun, label: Sun}
+                  - {value: tags, label: Tags}
+                  - {value: terminal, label: Terminal}
+              - {key: label, type: string, label: Label}
+          - {key: picture, type: image, label: First picture, showIf: {sample: pictures}}
+          - {key: picture_dark, type: image, label: First picture on a dark page, showIf: {sample: pictures}}
+          - {key: picture2, type: image, label: Second picture, showIf: {sample: pictures}}
+          - {key: picture2_dark, type: image, label: Second picture on a dark page, showIf: {sample: pictures}}
+          - key: pills
+            type: repeat
+            label: Labels
+            help: Drawn beside the pictures in the accent color.
+            showIf: {sample: pictures}
+            fields:
+              - key: icon
+                type: select
+                label: Icon
+                default: none
+                options:
+                  - {value: none, label: None}
+                  - {value: archive, label: Archive}
+                  - {value: chart, label: Chart}
+                  - {value: code, label: Code}
+                  - {value: container, label: Container}
+                  - {value: file, label: File}
+                  - {value: folder, label: Folder}
+                  - {value: git-branch, label: Branch}
+                  - {value: github, label: GitHub}
+                  - {value: globe, label: Globe}
+                  - {value: image, label: Picture}
+                  - {value: link, label: Link}
+                  - {value: lock, label: Lock}
+                  - {value: message, label: Message}
+                  - {value: monitor, label: Screen}
+                  - {value: moon, label: Moon}
+                  - {value: palette, label: Palette}
+                  - {value: puzzle, label: Puzzle piece}
+                  - {value: rss, label: Feed}
+                  - {value: search, label: Search}
+                  - {value: sigma, label: Sigma}
+                  - {value: sun, label: Sun}
+                  - {value: tags, label: Tags}
+                  - {value: terminal, label: Terminal}
+              - {key: label, type: string, label: Label}
+
+  - key: home_gallery
+    type: section
+    label: "Home page: pictures"
+    preview: home
+    fields:
+      - key: gallery_label
+        type: string
+        label: Small heading
+        help: A few words in red over the title.
+        placeholder: Themes
+      - key: gallery_title
+        type: string
+        label: Title
+      - key: gallery_text
+        type: text
+        label: Text
+      - key: gallery
+        type: repeat
+        label: Pictures
+        help: Prints laid on a band of darker paper, two to a row, each with a caption and a link if it has one.
+        fields:
+          - {key: image, type: image, label: Picture}
+          - {key: image_dark, type: image, label: Picture on a dark page}
+          - {key: title, type: string, label: Caption}
+          - {key: note, type: string, label: Note, help: A few words at the other end of the caption.}
+          - {key: link, type: url, label: Link}
+
+  - key: home_end
+    type: section
+    label: "Home page: news and more"
+    preview: home
+    fields:
       - key: show_news
         type: boolean
         label: Show the latest news
-        help: The three newest posts, under the features.
+        help: The three newest posts.
         default: true
       - key: more_title
         type: string
         label: Closing heading
-        help: A small heading over the list at the end of the home page, such as related projects.
+        help: A heading beside the cards at the end of the home page, such as related projects.
         placeholder: More from us
       - key: more_text
         type: text
@@ -201,13 +430,15 @@ settings:
         help: A sentence under the closing heading.
       - key: more
         type: repeat
-        label: Closing list
-        help: Rows at the end of the home page, each a title and a sentence, a short note such as a status, and a link if it has one.
+        label: Closing cards
+        help: Cards at the end of the home page, each a title and a sentence, a short note such as a status, and a link if it has one.
         fields:
           - {key: title, type: string, label: Title}
           - {key: text, type: text, label: Text}
           - {key: note, type: string, label: Note, placeholder: In development}
+          - {key: note_quiet, type: boolean, label: Gray note, help: For something not out yet., default: false}
           - {key: link, type: url, label: Link}
+          - {key: link_label, type: string, label: Link text, placeholder: Learn more}
 
   - key: docs
     type: section

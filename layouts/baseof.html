@@ -6,6 +6,7 @@
 {{- $inTree := and (eq $kind "single") (ne (printf "%v" .Page.Params.layout) "wide") (partial "tree-has.html" (dict "site" .Site "url" .Page.RelPermalink)) -}}
 {{- $class := "" -}}
 {{- if $inTree }}{{ $class = "has-tree" }}{{ else if eq $kind "home" }}{{ $class = "is-home" }}{{ end -}}
+{{- if $s.texture }}{{ $class = str.Trim (printf "%s grain" $class) }}{{ end -}}
 <!DOCTYPE html>
 <html lang="{{ $lang }}"{{ with $s.color_scheme }}{{ if or (eq . "light") (eq . "dark") }} data-theme="{{ . }}"{{ end }}{{ end }}>
 <head>
