@@ -72,6 +72,7 @@ settings:
   - key: navigation
     type: section
     label: Navigation
+    preview: page
     fields:
       - key: nav
         type: repeat
@@ -126,6 +127,7 @@ settings:
   - key: home
     type: section
     label: Home page
+    preview: home
     fields:
       - key: badge_text
         type: string
@@ -210,6 +212,7 @@ settings:
   - key: docs
     type: section
     label: Docs
+    preview: page
     fields:
       - key: show_toc
         type: boolean
