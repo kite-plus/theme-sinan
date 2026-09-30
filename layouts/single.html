@@ -14,9 +14,12 @@
       {{- with .Page.Description }}
       <p class="lead">{{ . }}</p>
       {{- end }}
+      {{- $dated := not (time.IsZero .Page.PublishDate) }}
       <p class="post-meta">
+        {{- if $dated }}
         <time datetime="{{ time.Format "2006-01-02" .Page.PublishDate }}">{{ partial "t.html" (dict "k" "date" "lang" $lang "t" .Page.PublishDate) }}</time>
-        {{- if $reading }}<span class="sep" aria-hidden="true">·</span><span>{{ partial "t.html" (dict "k" "minutes" "lang" $lang "n" (time.Minutes .Page.ReadingTime)) }}</span>{{ end }}
+        {{- end }}
+        {{- if $reading }}{{ if $dated }}<span class="sep" aria-hidden="true">·</span>{{ end }}<span>{{ partial "t.html" (dict "k" "minutes" "lang" $lang "n" (time.Minutes .Page.ReadingTime)) }}</span>{{ end }}
         {{- with partial "terms.html" (dict "page" .Page "site" $site) }}
         <span class="terms">{{ . }}</span>
         {{- end }}

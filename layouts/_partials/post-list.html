@@ -4,7 +4,9 @@
 <ul class="post-list">
   {{- range .Pages }}
   <li class="post-item">
+    {{- if not (time.IsZero .PublishDate) }}
     <time datetime="{{ time.Format "2006-01-02" .PublishDate }}">{{ time.Format "2006 · 01 · 02" .PublishDate }}</time>
+    {{- end }}
     <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
     {{- with .Excerpt }}
     <p class="excerpt">{{ . }}</p>

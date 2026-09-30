@@ -156,7 +156,9 @@
     {{- range $i, $p := .Pages }}
       {{- if lt $i 3 }}
     <li><a class="news-row" href="{{ $p.RelPermalink }}">
+      {{- if not (time.IsZero $p.PublishDate) }}
       <time datetime="{{ time.Format "2006-01-02" $p.PublishDate }}">{{ time.Format "2006 · 01 · 02" $p.PublishDate }}</time>
+      {{- end }}
       <span class="news-title">{{ $p.Title }}</span>
       <span class="news-excerpt">{{ $p.Excerpt }}</span>
       {{- partial "icon.html" "arrow-up-right" }}
