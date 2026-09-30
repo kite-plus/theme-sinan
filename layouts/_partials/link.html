@@ -1,10 +1,14 @@
-{{- /* A link an author wrote in the settings. One to another site opens in a
-       new tab and says so. Called as: partial "link.html" (dict "label" L
-       "url" U "lang" .Site.Language), with "class" to style it, and with
-       "current" or "exact" set when it leads to where the reader is. */ -}}
+{{- /* A link an author wrote in the settings or a menu. One to another site
+       opens in a new tab and says so. Called as: partial "link.html" (dict
+       "label" L "url" U "lang" .Site.Language), with "class" to style it,
+       with "current" or "exact" set when it leads to where the reader is, and
+       with "resolved" for an address a menu has put under the site's path
+       already. */ -}}
 {{- $external := or (str.HasPrefix "http://" .url) (str.HasPrefix "https://" .url) -}}
+{{- $href := .url -}}
+{{- if not .resolved }}{{ $href = url.Rel .url }}{{ end -}}
 {{- $class := "" -}}
 {{- with .class }}{{ $class = . }}{{ end -}}
 {{- if .current }}{{ $class = str.Trim (printf "%s current" $class) }}{{ end -}}
-<a href="{{ url.Rel .url }}"{{ with $class }} class="{{ . }}"{{ end }}{{ if .exact }} aria-current="page"{{ end }}{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ .label }}{{ if $external }}{{ partial "icon.html" "external" }}<span class="sr-only">{{ partial "t.html" (dict "k" "new_tab" "lang" .lang) }}</span>{{ end }}</a>
+<a href="{{ $href }}"{{ with $class }} class="{{ . }}"{{ end }}{{ if .exact }} aria-current="page"{{ end }}{{ if $external }} target="_blank" rel="noopener"{{ end }}>{{ .label }}{{ if $external }}{{ partial "icon.html" "external" }}<span class="sr-only">{{ partial "t.html" (dict "k" "new_tab" "lang" .lang) }}</span>{{ end }}</a>
 {{- /**/ -}}

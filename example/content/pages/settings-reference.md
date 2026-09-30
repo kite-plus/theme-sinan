@@ -26,9 +26,13 @@ The studio shows these as a form under **Settings → Theme**, in the sections b
 
 ## Navigation
 
+The header draws the site's `main` menu, which lives in `kite.yaml` under
+`menus` and is edited under Settings → Menus in the studio. Until the site
+gives that menu links, the header shows `nav` below.
+
 | Setting | Type | What it does |
 | --- | --- | --- |
-| `nav` | list of `label`, `url` | The links in the header |
+| `nav` | list of `label`, `url` | The links in the header while the site has no main menu |
 | `button_label` | string | An ink button at the right end of the header |
 | `button_url` | url | Where the button leads |
 | `sidebar` | list of `title`, `pages` | The docs tree; each page is a `label` and a `url` |

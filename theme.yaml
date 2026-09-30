@@ -2,7 +2,7 @@ name: vane
 title: Vane
 version: 0.2.0
 apiVersion: kite/v1
-requires: ">=0.1.0 <2.0.0"
+requires: ">=0.1.4 <2.0.0"
 description: A documentation theme for product docs, project sites and knowledge bases, drawn on paper in ink. A home page with a kite in its sky, docs in an ordered tree with a table of contents, and news, by day and by night, with nothing loaded from third parties.
 author:
   name: Kite
@@ -15,6 +15,11 @@ screenshot: screenshot.webp
 capabilities: [static, dynamic]
 contentTypes: [post, page]
 taxonomies: [tags, categories]
+
+menus:
+  - name: main
+    label: Header
+    description: The links across the top of every page, and in the drawer on a phone. Until the site gives this menu links, the header links under Navigation are shown.
 
 layouts:
   - name: wide
@@ -86,7 +91,7 @@ settings:
       - key: nav
         type: repeat
         label: Header links
-        help: An address within the site starts with a slash. A link to another site opens in a new tab.
+        help: Shown while the site's header menu has no links. An address within the site starts with a slash. A link to another site opens in a new tab.
         fields:
           - {key: label, type: string, label: Label, placeholder: Guide}
           - {key: url, type: url, label: Address, placeholder: /introduction/}

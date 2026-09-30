@@ -1,7 +1,8 @@
-{{- /* The header links. The one to where the reader is is marked. Anywhere
-       else in the docs the first link into the docs tree is, unless another
-       link leads to the very page, and anywhere in the news the news
-       listing is. Called with the page's context. */ -}}
+{{- /* The header links: the site's main menu, or the header links of the
+       settings while the menu has none. The one to where the reader is is
+       marked. Anywhere else in the docs the first link into the docs tree
+       is, unless another link leads to the very page, and anywhere in the
+       news the news listing is. Called with the page's context. */ -}}
 {{- $lang := .Site.Language -}}
 {{- $site := .Site -}}
 {{- $here := .Page.RelPermalink -}}
@@ -11,6 +12,19 @@
 {{- $news := url.For "list" "post" -}}
 {{- $anyExact := false -}}
 {{- $docs := "" -}}
+{{- with .Site.Menus.main }}
+{{- /* The menu's addresses are under the site's path already. An entry that
+       only heads others has none, and the header draws one level. */ -}}
+{{- range . }}{{ with .URL }}
+  {{- if or (eq . $here) (eq (printf "%s/" .) $here) }}{{ $anyExact = true }}{{ end }}
+  {{- if and (not $docs) (partial "tree-has.html" (dict "site" $site "url" .)) }}{{ $docs = . }}{{ end }}
+{{- end }}{{ end }}
+{{- range $item := . }}{{ with $item.URL }}
+  {{- $exact := or (eq . $here) (eq (printf "%s/" .) $here) }}
+  {{- $current := or $exact (and $inDocs (not $anyExact) (eq . $docs)) (and $inNews (eq . $news)) }}
+  {{ partial "link.html" (dict "label" $item.Name "url" . "resolved" true "lang" $lang "current" $current "exact" $exact) }}
+{{- end }}{{ end }}
+{{- else }}
 {{- range .Site.ThemeSettings.nav }}
   {{- if and .label .url }}
     {{- $u := url.Rel .url }}
@@ -25,4 +39,5 @@
     {{- $current := or $exact (and $inDocs (not $anyExact) (eq $u $docs)) (and $inNews (eq $u $news)) }}
     {{ partial "link.html" (dict "label" .label "url" .url "lang" $lang "current" $current "exact" $exact) }}
   {{- end }}
+{{- end }}
 {{- end -}}
