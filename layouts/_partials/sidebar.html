@@ -4,7 +4,7 @@
 {{- $lang := .Site.Language -}}
 {{- $here := .Page.RelPermalink -}}
 <aside class="sidebar" id="sidebar">
-  {{- with .Site.ThemeSettings.nav }}
+  {{- if or .Site.Menus.main .Site.ThemeSettings.nav }}
   <nav class="drawer-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
     {{- partial "nav-links.html" $ }}
   </nav>

@@ -1,10 +1,13 @@
 {{- $lang := .Site.Language -}}
 {{- $s := .Site.ThemeSettings -}}
+{{- /* The header links are the site's main menu, or the nav setting while
+       the site has none; either is enough to draw them. */ -}}
+{{- $links := or .Site.Menus.main $s.nav -}}
 <header class="site-header">
   <div class="header-inner">
     {{ partial "brand.html" . }}
     <span class="brand-section" aria-hidden="true">{{ partial "t.html" (dict "k" "docs" "lang" $lang) }}</span>
-    {{- with $s.nav }}
+    {{- if $links }}
     <nav class="header-nav" aria-label="{{ partial "t.html" (dict "k" "main_nav" "lang" $lang) }}">
       {{- partial "nav-links.html" $ }}
     </nav>
@@ -24,7 +27,7 @@
       {{- if and $s.button_label $s.button_url }}
       {{ partial "link.html" (dict "label" $s.button_label "url" $s.button_url "lang" $lang "class" "button primary header-button") }}
       {{- end }}
-      {{- if or $s.nav $s.sidebar }}
+      {{- if or $links $s.sidebar }}
       {{- /* The menu is the checkbox before the header, which works without a
              script; this label is only its face, so it is hidden from
              assistive technology, which reaches the checkbox itself. */}}
