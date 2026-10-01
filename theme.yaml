@@ -1,6 +1,6 @@
 name: vane
 title: Vane
-version: 1.0.0
+version: 1.0.1
 apiVersion: kite/v1
 requires: ">=0.1.4 <2.0.0"
 description: A documentation theme for product docs, project sites and knowledge bases, drawn on paper in ink. A home page with a kite in its sky, docs in an ordered tree with a table of contents, and news, by day and by night, with nothing loaded from third parties.
