@@ -82,9 +82,11 @@ kite theme verify .
 
 ## Releasing
 
-`scripts/package.sh` packs `dist/vane-<version>.zip`, one folder named
-`vane` holding `theme.yaml` and what the theme is made of, which the studio
-installs as it is. Tag the release and attach the zip.
+`scripts/package.sh` runs `kite theme pack`, which needs Kite 0.1.5 or
+later, to pack `dist/vane-<version>.zip`: one folder named `vane` holding
+`theme.yaml` and what the theme is made of, which the studio installs as it
+is. Set `KITE` to use another kite binary than the one on `PATH`. Tag the
+release and attach the zip.
 
 ## Design
 

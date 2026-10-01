@@ -94,7 +94,7 @@ theme-vane/
 ├── i18n/zh-CN.yaml     # 后台里主题的中文
 ├── screenshot.webp     # 1280×800，后台主题列表里用
 ├── example/            # 用这套主题的 Kite 站点，内容就是风标自己的使用文档
-├── scripts/package.sh  # 打出后台能直接安装的 zip
+├── scripts/package.sh  # 用 kite theme pack 打出后台能直接安装的 zip
 ├── LICENSE             # Apache-2.0
 └── docs/design/        # 本文
 ```
@@ -102,7 +102,7 @@ theme-vane/
 - **和主程序分开**：风标的源码只在这个仓库里。Kite 主程序只内置默认主题，不打包、也不引用风标；风标也不引用 Kite 的源码，只依赖公开的主题契约，靠 `theme.yaml` 里的 `apiVersion` 和 `requires` 声明能配哪些版本的 Kite。
 - **开发**：在 `example/` 里 `kite run`，主题通过 `example/themes/vane` 这个指向仓库根目录的符号链接接进去，改模板、样式、语言包保存即生效（Kite 原先不跟随这个链接，见 §11 第 1 项）。Kite 不会写穿符号链接指向的主题，在后台装同名主题也不会覆盖正在开发的文件。
 - **CI**：`kite theme verify .`，再用 `kite build --verify` 构建 `example/`。
-- **发版**：`scripts/package.sh` 打出 `dist/vane-<版本>.zip`（`theme.yaml` 在包里唯一的文件夹 `vane` 中，后台能直接安装），打 tag 并附上这个 zip。
+- **发版**：`scripts/package.sh` 调用 `kite theme pack`（要 Kite 0.1.5 及以上，`KITE` 可以指定别的 kite），打出 `dist/vane-<版本>.zip`（`theme.yaml` 在包里唯一的文件夹 `vane` 中，后台能直接安装），打 tag 并附上这个 zip。
 - **官网怎么用它**：官网装的是发布出来的 zip：在后台上传安装或升级，文件落在官网的 `themes/vane/`，随发布一起提交。CI 构建不需要再去网上取主题，版本也看得见。官网发现主题的问题，回到这里修、发版，再在官网升级，不在官网仓库里直接改主题。
 
 ## 8. 里程碑

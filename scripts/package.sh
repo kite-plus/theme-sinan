@@ -1,16 +1,14 @@
 #!/bin/sh
-# Packs a release as the zip the studio installs: one folder named after the
-# theme, holding theme.yaml and what the theme is made of, nothing more.
+# Packs a release as the zip the index lists, with `kite theme pack`, which
+# needs Kite 0.1.5 or later. KITE names another kite binary than the one on
+# PATH.
 set -eu
 cd "$(dirname "$0")/.."
 
-name=$(sed -n 's/^name: *//p' theme.yaml)
-version=$(sed -n 's/^version: *//p' theme.yaml)
-out="dist/$name-$version.zip"
-
-rm -rf dist/stage "$out"
-mkdir -p "dist/stage/$name"
-cp -R theme.yaml layouts static i18n screenshot.webp LICENSE README.md "dist/stage/$name/"
-(cd dist/stage && zip -qrX "../$name-$version.zip" "$name" -x "*.DS_Store")
-rm -rf dist/stage
-echo "$out"
+kite=${KITE:-kite}
+# An older Kite prints its help for an unknown command and still exits 0.
+if ! "$kite" theme --help 2>&1 | grep -q '^  pack '; then
+	echo "package.sh: $kite has no 'theme pack'; Kite 0.1.5 or later has it" >&2
+	exit 1
+fi
+exec "$kite" theme pack "$@"
