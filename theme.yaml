@@ -406,7 +406,7 @@ settings:
       - key: gallery
         type: repeat
         label: Pictures
-        help: Prints laid on a band of darker paper, two to a row, each with a caption and a link if it has one.
+        help: Prints laid on a band of darker paper, two to a row, or three when there are three, six or nine, each with a caption and a link if it has one.
         fields:
           - {key: image, type: image, label: Picture}
           - {key: image_dark, type: image, label: Picture on a dark page}
